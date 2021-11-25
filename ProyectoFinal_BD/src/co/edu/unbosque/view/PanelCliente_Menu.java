@@ -25,7 +25,8 @@ public class PanelCliente_Menu extends JPanel {
 
 		cuenta = new JButton("Iniciar Sesión");
 		cuenta.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-
+//		cuenta.setBorderPainted(false);
+//		cuenta.setContentAreaFilled(false);
 		cuenta.setEnabled(true);
 
 		registrar = new JButton("Registrarse");
@@ -51,33 +52,6 @@ public class PanelCliente_Menu extends JPanel {
 
 	}
 
-	public JButton getRegistrar() {
-		return cuenta;
-	}
-
-	public void setRegistrar(JButton registrar) {
-		cuenta = registrar;
-	}
-
-	public JButton getBorrar() {
-		return registrar;
-	}
-
-	public void setBorrar(JButton borrar) {
-		registrar = borrar;
-	}
-
-
-
-	public JButton getSalir() {
-		return salir;
-	}
-
-	public void setSalir(JButton salir) {
-		this.salir = salir;
-	}
-
-
 	public JButton getVacio() {
 		return vacio;
 	}
@@ -94,6 +68,14 @@ public class PanelCliente_Menu extends JPanel {
 		this.cuenta = cuenta;
 	}
 
+	public JButton getRegistrar() {
+		return registrar;
+	}
+
+	public void setRegistrar(JButton registrar) {
+		this.registrar = registrar;
+	}
+
 	public JButton getVolver() {
 		return volver;
 	}
@@ -101,6 +83,16 @@ public class PanelCliente_Menu extends JPanel {
 	public void setVolver(JButton volver) {
 		this.volver = volver;
 	}
+
+	public JButton getSalir() {
+		return salir;
+	}
+
+	public void setSalir(JButton salir) {
+		this.salir = salir;
+	}
+
+
 	
 
 }

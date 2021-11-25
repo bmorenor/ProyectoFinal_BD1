@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 public class PanelEstandar extends JPanel {
 
-	private PanelAdmin_Menu panelMenu;
+	private PanelMenu panelMenu;
 	private Image imagenPrincipal;
 	private PanelRegistrar panelRegistrar;
 	private PanelEliminar panelEliminar;
@@ -23,6 +23,9 @@ public class PanelEstandar extends JPanel {
 	private PanelConsulta_Registro panelConsulta_Registro;
 	private PanelCliente_Menu panelCliente_Menu;
 	private PanelAdmin_Menu panelAdmin_Menu;
+	private PanelRegistro_Usuario panelRegistro_Usuario;
+	private PanelRegistro_Admin panelRegistro_Admin;
+	private PanelMenu_Usuario panelMenu_Usuario;
 	private JLabel vacio;
 	private URL imagen;
 
@@ -47,25 +50,38 @@ public class PanelEstandar extends JPanel {
 		imagen = this.getClass().getResource("/co/edu/unbosque/view/images/perro1.jpg");
 		imagenPrincipal = new ImageIcon(imagen).getImage();
 
-		panelMenu = new PanelAdmin_Menu();
-		panelMenu.setVisible(false);
+		panelMenu = new PanelMenu();
+		panelMenu.setVisible(true);
 		panelMenu.setOpaque(false);
 
 		panelRegistrar = new PanelRegistrar();
 		panelRegistrar.setVisible(false);
 		panelRegistrar.setOpaque(false);
+		
+		panelRegistro_Usuario = new PanelRegistro_Usuario();
+		panelRegistro_Usuario.setVisible(false);
+		panelRegistro_Usuario.setOpaque(false);
+		
+		panelRegistro_Admin = new PanelRegistro_Admin();
+		panelRegistro_Admin.setVisible(false);
+		panelRegistro_Admin.setOpaque(false);
+		
+		panelMenu_Usuario = new PanelMenu_Usuario();
+		panelMenu_Usuario.setVisible(false);
+		panelMenu_Usuario.setOpaque(false);
+		
 
 		panelEliminar = new PanelEliminar();
 		panelEliminar.setVisible(false);
 		panelEliminar.setOpaque(false);
 		
 		panelCliente_Menu = new PanelCliente_Menu();
-		panelCliente_Menu.setVisible(true);
+		panelCliente_Menu.setVisible(false);
 		panelCliente_Menu.setOpaque(false);
 
 		panelAdmin_Menu = new PanelAdmin_Menu();
-		panelCliente_Menu.setVisible(true);
-		panelCliente_Menu.setOpaque(false);
+		panelAdmin_Menu.setVisible(false);
+		panelAdmin_Menu.setOpaque(false);
 		
 		panelConsulta_Registro = new PanelConsulta_Registro();
 		panelConsulta_Registro.setVisible(false);
@@ -76,12 +92,18 @@ public class PanelEstandar extends JPanel {
 		panelActualizar.setOpaque(false);
 		
 		add(panelMenu);
+		
 		add(panelCliente_Menu);
 		add(panelRegistrar);
+		add(panelRegistro_Usuario);
+		add(panelMenu_Usuario);
+		add(panelRegistro_Admin);
 		add(panelActualizar);
 		add(panelConsulta_Registro);
-		add(vacio);
+//		add(vacio);
 		add(panelEliminar);
+		add(panelAdmin_Menu);
+		
 
 	}
 
@@ -89,20 +111,29 @@ public class PanelEstandar extends JPanel {
 		g.drawImage(imagenPrincipal, 0, 0, getWidth(), getHeight(), this);
 	}
 
-	public PanelAdmin_Menu getPanelMenu() {
-		return panelMenu;
-	}
 
-	public void setPanelMenu(PanelAdmin_Menu panelMenu) {
-		this.panelMenu = panelMenu;
-	}
+
 
 	public Image getImagenPrincipal() {
 		return imagenPrincipal;
 	}
 
-	public void setImagenPrincipal(Image imagenPrincipal) {
-		this.imagenPrincipal = imagenPrincipal;
+
+
+	public URL getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(URL imagen) {
+		this.imagen = imagen;
+	}
+
+	public PanelMenu getPanelMenu() {
+		return panelMenu;
+	}
+
+	public void setPanelMenu(PanelMenu panelMenu) {
+		this.panelMenu = panelMenu;
 	}
 
 	public PanelRegistrar getPanelRegistrar() {
@@ -111,23 +142,6 @@ public class PanelEstandar extends JPanel {
 
 	public void setPanelRegistrar(PanelRegistrar panelRegistrar) {
 		this.panelRegistrar = panelRegistrar;
-	}
-	
-
-	public PanelCliente_Menu getPanelCliente_Menu() {
-		return panelCliente_Menu;
-	}
-
-	public void setPanelCliente_Menu(PanelCliente_Menu panelCliente_Menu) {
-		this.panelCliente_Menu = panelCliente_Menu;
-	}
-
-	public PanelAdmin_Menu getPanelAdmin_Menu() {
-		return panelAdmin_Menu;
-	}
-
-	public void setPanelAdmin_Menu(PanelAdmin_Menu panelAdmin_Menu) {
-		this.panelAdmin_Menu = panelAdmin_Menu;
 	}
 
 	public PanelEliminar getPanelEliminar() {
@@ -146,6 +160,54 @@ public class PanelEstandar extends JPanel {
 		this.panelActualizar = panelActualizar;
 	}
 
+	public PanelConsulta_Registro getPanelConsulta_Registro() {
+		return panelConsulta_Registro;
+	}
+
+	public void setPanelConsulta_Registro(PanelConsulta_Registro panelConsulta_Registro) {
+		this.panelConsulta_Registro = panelConsulta_Registro;
+	}
+
+	public PanelCliente_Menu getPanelCliente_Menu() {
+		return panelCliente_Menu;
+	}
+
+	public void setPanelCliente_Menu(PanelCliente_Menu panelCliente_Menu) {
+		this.panelCliente_Menu = panelCliente_Menu;
+	}
+
+	public PanelAdmin_Menu getPanelAdmin_Menu() {
+		return panelAdmin_Menu;
+	}
+
+	public void setPanelAdmin_Menu(PanelAdmin_Menu panelAdmin_Menu) {
+		this.panelAdmin_Menu = panelAdmin_Menu;
+	}
+
+	public PanelRegistro_Usuario getPanelRegistro_Usuario() {
+		return panelRegistro_Usuario;
+	}
+
+	public void setPanelRegistro_Usuario(PanelRegistro_Usuario panelRegistro_Usuario) {
+		this.panelRegistro_Usuario = panelRegistro_Usuario;
+	}
+
+	public PanelRegistro_Admin getPanelRegistro_Admin() {
+		return panelRegistro_Admin;
+	}
+
+	public void setPanelRegistro_Admin(PanelRegistro_Admin panelRegistro_Admin) {
+		this.panelRegistro_Admin = panelRegistro_Admin;
+	}
+
+	public PanelMenu_Usuario getPanelMenu_Usuario() {
+		return panelMenu_Usuario;
+	}
+
+	public void setPanelMenu_Usuario(PanelMenu_Usuario panelMenu_Usuario) {
+		this.panelMenu_Usuario = panelMenu_Usuario;
+	}
+
 	public JLabel getVacio() {
 		return vacio;
 	}
@@ -154,20 +216,14 @@ public class PanelEstandar extends JPanel {
 		this.vacio = vacio;
 	}
 
-	public URL getImagen() {
-		return imagen;
+	public void setImagenPrincipal(Image imagenPrincipal) {
+		this.imagenPrincipal = imagenPrincipal;
 	}
 
-	public void setImagen(URL imagen) {
-		this.imagen = imagen;
-	}
 
-	public PanelConsulta_Registro getPanelConsulta_Registro() {
-		return panelConsulta_Registro;
-	}
+	
+	
 
-	public void setPanelConsulta_Registro(PanelConsulta_Registro panelConsulta_Registro) {
-		this.panelConsulta_Registro = panelConsulta_Registro;
-	}
+
 
 }

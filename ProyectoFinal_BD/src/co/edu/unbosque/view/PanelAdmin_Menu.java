@@ -12,11 +12,11 @@ public class PanelAdmin_Menu extends JPanel {
 	private JButton cuenta;
 	private JButton registrar;
 	private JButton volver;
-	private JButton salir;
+//	private JButton salir;
 
 	public PanelAdmin_Menu() {
 
-		setLayout(new GridLayout(5, 1, 40, 40));
+		setLayout(new GridLayout(3, 1, 40, 40));
 
 		vacio = new JButton("VACIO");
 		vacio.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
@@ -33,8 +33,8 @@ public class PanelAdmin_Menu extends JPanel {
 		volver.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		volver.setEnabled(true);
 
-		salir = new JButton("Salir");
-		salir.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+//		salir = new JButton("Salir");
+//		salir.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 
 		add(vacio);
 
@@ -42,36 +42,9 @@ public class PanelAdmin_Menu extends JPanel {
 
 		add(volver);
 
-		add(salir);
+//		add(salir);
 
 	}
-
-	public JButton getRegistrar() {
-		return cuenta;
-	}
-
-	public void setRegistrar(JButton registrar) {
-		cuenta = registrar;
-	}
-
-	public JButton getBorrar() {
-		return registrar;
-	}
-
-	public void setBorrar(JButton borrar) {
-		registrar = borrar;
-	}
-
-
-
-	public JButton getSalir() {
-		return salir;
-	}
-
-	public void setSalir(JButton salir) {
-		this.salir = salir;
-	}
-
 
 	public JButton getVacio() {
 		return vacio;
@@ -89,6 +62,14 @@ public class PanelAdmin_Menu extends JPanel {
 		this.cuenta = cuenta;
 	}
 
+	public JButton getRegistrar() {
+		return registrar;
+	}
+
+	public void setRegistrar(JButton registrar) {
+		this.registrar = registrar;
+	}
+
 	public JButton getVolver() {
 		return volver;
 	}
@@ -96,6 +77,16 @@ public class PanelAdmin_Menu extends JPanel {
 	public void setVolver(JButton volver) {
 		this.volver = volver;
 	}
+
+//	public JButton getSalir() {
+//		return salir;
+//	}
+//
+//	public void setSalir(JButton salir) {
+//		this.salir = salir;
+//	}
+
+
 	
 
 }

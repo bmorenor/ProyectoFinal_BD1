@@ -54,54 +54,77 @@ public class PanelMenu extends JPanel {
 	}
 
 
+	public JButton getVacio() {
+		return vacio;
+	}
 
-	public JButton getRegistrar() {
+
+	public void setVacio(JButton vacio) {
+		this.vacio = vacio;
+	}
+
+
+	public JButton getCliente() {
 		return cliente;
 	}
 
-	public void setRegistrar(JButton registrar) {
-		cliente = registrar;
+
+	public void setCliente(JButton cliente) {
+		this.cliente = cliente;
 	}
 
-	public JButton getBorrar() {
+
+	public JButton getAdministrador() {
 		return administrador;
 	}
 
-	public void setBorrar(JButton borrar) {
-		administrador = borrar;
+
+	public void setAdministrador(JButton administrador) {
+		this.administrador = administrador;
 	}
+
 
 	public JButton getConsultarRegistro() {
 		return consultarRegistro;
 	}
 
+
 	public void setConsultarRegistro(JButton consultarRegistro) {
 		this.consultarRegistro = consultarRegistro;
 	}
+
 
 	public JButton getConsultarRegistros() {
 		return consultarRegistros;
 	}
 
+
 	public void setConsultarRegistros(JButton consultarRegistros) {
 		this.consultarRegistros = consultarRegistros;
 	}
+
 
 	public JButton getSalir() {
 		return salir;
 	}
 
+
 	public void setSalir(JButton salir) {
 		this.salir = salir;
 	}
+
 
 	public JButton getActualizar() {
 		return actualizar;
 	}
 
+
 	public void setActualizar(JButton actualizar) {
 		this.actualizar = actualizar;
 	}
+
+
+
 
 	
 }
