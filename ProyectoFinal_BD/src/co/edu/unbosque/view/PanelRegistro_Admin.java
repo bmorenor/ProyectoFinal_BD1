@@ -48,7 +48,7 @@ public class PanelRegistro_Admin extends JPanel {
 		contraseña.setEnabled(true);
 		
 		password = new JPasswordField();
-		password.setFont((new Font("Comic Sans MS", Font.PLAIN, 30)));
+		password.setFont((new Font("Comic Sans MS", Font.PLAIN, 20)));
 
 
 		volver = new JButton("Volver");
@@ -61,7 +61,7 @@ public class PanelRegistro_Admin extends JPanel {
 		aceptar.setActionCommand("ACEPTAR_REGISTRO_ADMIN");
 		aceptar.setEnabled(true);
 
-		verContraseña = new JButton("Ver contraseña");
+		verContraseña = new JButton("Ver/ocultar contraseña");
 		verContraseña.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		verContraseña.setActionCommand("VER_CONTRASEÑA_REGISTRO_ADMIN");
 		

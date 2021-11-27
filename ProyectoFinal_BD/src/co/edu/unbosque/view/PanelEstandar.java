@@ -8,7 +8,7 @@ import java.awt.Image;
 import java.awt.Panel;
 import java.net.URL;
 import java.text.ParseException;
-
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,6 +26,8 @@ public class PanelEstandar extends JPanel {
 	private PanelRegistro_Usuario panelRegistro_Usuario;
 	private PanelRegistro_Admin panelRegistro_Admin;
 	private PanelMenu_Usuario panelMenu_Usuario;
+	private PanelCliente_NuevoR panelCliente_NuevoR;
+	
 	private JLabel vacio;
 	private URL imagen;
 
@@ -91,8 +93,13 @@ public class PanelEstandar extends JPanel {
 		panelActualizar.setVisible(false);
 		panelActualizar.setOpaque(false);
 		
-		add(panelMenu);
+		panelCliente_NuevoR = new PanelCliente_NuevoR();
+		panelCliente_NuevoR.setVisible(false);
+		panelCliente_NuevoR.setOpaque(true);
+		panelCliente_NuevoR.setBackground(Color.white);
 		
+		add(panelMenu);
+		add(panelCliente_NuevoR);
 		add(panelCliente_Menu);
 		add(panelRegistrar);
 		add(panelRegistro_Usuario);
@@ -218,6 +225,14 @@ public class PanelEstandar extends JPanel {
 
 	public void setImagenPrincipal(Image imagenPrincipal) {
 		this.imagenPrincipal = imagenPrincipal;
+	}
+
+	public PanelCliente_NuevoR getPanelCliente_NuevoR() {
+		return panelCliente_NuevoR;
+	}
+
+	public void setPanelCliente_NuevoR(PanelCliente_NuevoR panelCliente_NuevoR) {
+		this.panelCliente_NuevoR = panelCliente_NuevoR;
 	}
 
 
