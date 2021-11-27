@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
+import co.edu.unbosque.model.persistence.ClienteDAO;
+import co.edu.unbosque.model.persistence.PostgresBD;
 import co.edu.unbosque.view.VistaPrincipal;
 
 /**
@@ -16,12 +18,21 @@ import java.sql.*;
 
 public class Controller implements ActionListener {
 
-	VistaPrincipal vistaP;
+	public VistaPrincipal vistaP;
+	public PostgresBD bd;
+	public ClienteDAO clienteDAO;
+	
 	public static boolean a = true;
 
 	public Controller() throws ParseException {
 		vistaP = new VistaPrincipal();
-
+		bd = new PostgresBD();
+		clienteDAO = new  ClienteDAO();
+		
+	
+		
+	
+		clienteDAO.registrarCliente();
 		listener(this);
 
 	}
