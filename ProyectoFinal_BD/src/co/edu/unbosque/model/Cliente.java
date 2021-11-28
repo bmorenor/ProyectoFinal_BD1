@@ -8,7 +8,7 @@ public class Cliente {
 	private String correo;
 	private String documentoIdentidad;
 	private String usuario;
-	private String contraseña;
+	private String contrasenia;
 	private String estado;
 	
 	
@@ -20,7 +20,7 @@ public class Cliente {
 		this.correo = correo;
 		this.documentoIdentidad = documentoIdentidad;
 		this.usuario = usuario;
-		this.contraseña = contraseña;
+		this.contrasenia = contraseña;
 		this.estado = estado;
 	}
 
@@ -85,13 +85,16 @@ public class Cliente {
 	}
 
 
-	public String getContraseña() {
-		return contraseña;
+
+
+
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 
 

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
+import co.edu.unbosque.model.Cliente;
 import co.edu.unbosque.model.persistence.ClienteDAO;
 import co.edu.unbosque.model.persistence.PostgresBD;
 import co.edu.unbosque.view.VistaPrincipal;
@@ -20,19 +21,17 @@ public class Controller implements ActionListener {
 
 	public VistaPrincipal vistaP;
 	public PostgresBD bd;
+	public Cliente cliente;
 	public ClienteDAO clienteDAO;
-	
+
 	public static boolean a = true;
 
 	public Controller() throws ParseException {
 		vistaP = new VistaPrincipal();
 		bd = new PostgresBD();
-		clienteDAO = new  ClienteDAO();
-		
+		clienteDAO = new ClienteDAO();
 	
-		
-	
-		clienteDAO.registrarCliente();
+
 		listener(this);
 
 	}
@@ -115,6 +114,20 @@ public class Controller implements ActionListener {
 		// REGISTRAR CLIENTE
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelCliente_NuevoR().getAceptar()) {
 
+			String nombres = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getNombresT().getText();
+			String apellidos = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getApellidosT().getText();
+			String direccion = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDireccionT().getText();
+			String correo = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getCorreoT().getText();
+			String documento = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDocumentoT().getText();
+			String telefono = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getTelefonosT().getText();
+			String usuario = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().getText();
+			String contraseña1 = new String(vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().getPassword());
+			String contraseña2 = new String(vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().getPassword());
+			
+			
+			cliente = new Cliente(nombres, apellidos, direccion, correo, telefono, documento, usuario, contraseña2);
+			clienteDAO.registrarCliente(cliente);
+
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelCliente_NuevoR().getVolver()) {
 
@@ -177,6 +190,28 @@ public class Controller implements ActionListener {
 
 	public void salir() {
 		System.exit(0);
+	}
+
+	public boolean verificarRegistroCliente() {
+		boolean registro = true;
+
+		if (!vistaP.getPanelEstandar().getPanelCliente_NuevoR().getNombresT().getText().equals("")
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getApellidosT().getText().equals("")
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDireccionT().getText().equals("")
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getCorreoT().getText().equals("")
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDocumentoT().getText().equals("")
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getTelefonosT().getText().equals("")
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().getText().equals("")
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().getPassword().equals(null)
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().getPassword().equals(null)) {
+
+			registro = true;
+		} else {
+			vistaP.mostrarError("Por favor ingrese todos los campos");
+			registro = false;
+		}
+		return registro;
+
 	}
 
 }
