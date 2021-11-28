@@ -14,7 +14,7 @@ public class PanelRegistro_Usuario extends JPanel {
 	private JButton vacio;
 	private JButton vacio2;
 	private JLabel cuenta;
-	private JLabel contraseña;
+	private JLabel contrasenia;
 	private JButton aceptar;
 	private JButton volver;
 	private JTextField usuario;
@@ -43,9 +43,9 @@ public class PanelRegistro_Usuario extends JPanel {
 		usuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		usuario.setEnabled(true);
 		
-		contraseña = new JLabel("Contraseña: ");
-		contraseña.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		contraseña.setEnabled(true);
+		contrasenia = new JLabel("Contraseña: ");
+		contrasenia.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		contrasenia.setEnabled(true);
 		
 		password = new JPasswordField();
 		password.setFont((new Font("Comic Sans MS", Font.PLAIN, 20)));
@@ -70,7 +70,7 @@ public class PanelRegistro_Usuario extends JPanel {
 		add(vacio2);
 		add(cuenta);
 		add(usuario);
-		add(contraseña);
+		add(contrasenia);
 		add(password);
 		add(verContraseña);
 		add(aceptar);
@@ -143,14 +143,18 @@ public class PanelRegistro_Usuario extends JPanel {
 
 
 
-	public JLabel getContraseña() {
-		return contraseña;
+
+
+
+
+	public JLabel getContrasenia() {
+		return contrasenia;
 	}
 
 
 
-	public void setContraseña(JLabel contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenia(JLabel contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 
 

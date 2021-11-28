@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import co.edu.unbosque.model.Cliente;
+import co.edu.unbosque.model.Cliente_Telefono;
 import co.edu.unbosque.model.persistence.ClienteDAO;
 import co.edu.unbosque.model.persistence.PostgresBD;
 import co.edu.unbosque.view.VistaPrincipal;
@@ -23,6 +24,7 @@ public class Controller implements ActionListener {
 	public PostgresBD bd;
 	public Cliente cliente;
 	public ClienteDAO clienteDAO;
+	public Cliente_Telefono cliente_Telefono;
 
 	public static boolean a = true;
 
@@ -99,8 +101,23 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Usuario().getAceptar()) {
-			vistaP.getPanelEstandar().getPanelRegistro_Usuario().setVisible(false);
-			vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
+				if(!vistaP.getPanelEstandar().getPanelRegistro_Usuario().getUsuario().getText().equals("") &&
+						!vistaP.getPanelEstandar().getPanelRegistro_Usuario().getPassword().getPassword().equals(null)) {
+					
+					String usuario = vistaP.getPanelEstandar().getPanelRegistro_Usuario().getUsuario().getText();
+					String constrasenia = new String(vistaP.getPanelEstandar().getPanelRegistro_Usuario().getPassword().getPassword());
+					
+					if(clienteDAO.verificarUsuarioInicio(constrasenia, usuario)) {
+						vistaP.mostrarMensaje("Bienvenido: "+usuario);
+						vistaP.getPanelEstandar().getPanelRegistro_Usuario().setVisible(false);
+						vistaP.getPanelEstandar().getPanelMenu_Usuario().setVisible(true);
+					}else {
+						vistaP.mostrarError("Verifique los campos");
+					}
+					
+				}else {
+					vistaP.mostrarError("Verifique los campos");
+				}
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Usuario().getVerContraseña()) {
 			if (a == true) {
@@ -123,10 +140,35 @@ public class Controller implements ActionListener {
 			String usuario = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().getText();
 			String contraseña1 = new String(vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().getPassword());
 			String contraseña2 = new String(vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().getPassword());
+			String estado = "A";
+			if(verificarRegistroCliente()==true) {
+				if(contraseña1.equals(contraseña2)) {
+					cliente = new Cliente(nombres, apellidos, direccion, correo, documento, usuario, contraseña2,estado);
+					cliente_Telefono =  new Cliente_Telefono(telefono, estado);
+					if(clienteDAO.verificarNumeros(cliente_Telefono)==true) {
+						if(clienteDAO.verificarUsuario(cliente)==true) {
+							clienteDAO.registrarCliente(cliente, cliente_Telefono);
+							vistaP.mostrarMensaje("Registrado con exito");
+							vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(false);
+							vistaP.getPanelEstandar().getPanelCliente_NuevoR().setVisible(true);
+							borrarCampos();
+						
+						}else {
+							vistaP.mostrarError("El usuario ya esta registrado");
+						}
+					
+					}else {
+						vistaP.mostrarError("Algun número ya ha estado registrado anteriormente");
+					}
+					
+				}else {
+					vistaP.mostrarError("Las contraseñas no coinciden");
+				}
+			}else {
+				vistaP.mostrarError("Por favor verifique los campos");
+			}
 			
 			
-			cliente = new Cliente(nombres, apellidos, direccion, correo, telefono, documento, usuario, contraseña2);
-			clienteDAO.registrarCliente(cliente);
 
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelCliente_NuevoR().getVolver()) {
@@ -207,11 +249,23 @@ public class Controller implements ActionListener {
 
 			registro = true;
 		} else {
-			vistaP.mostrarError("Por favor ingrese todos los campos");
+			
 			registro = false;
 		}
 		return registro;
 
+	}
+	
+	public void borrarCampos() {
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getNombresT().setText("");
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getApellidosT().setText("");
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDireccionT().setText("");
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getCorreoT().setText("");
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDocumentoT().setText("");
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getTelefonosT().setText("");;
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().setText("");
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().setText("");
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().setText("");
 	}
 
 }
