@@ -41,7 +41,7 @@ public class PanelRegistro_Mascota extends JPanel {
 		vacio.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
 		
 		sexo = new JComboBox<String>();
-		sexo.addItem("Seleccione....");
+		sexo.addItem("Seleccione...");
 		sexo.addItem("F");
 		sexo.addItem("M");
 		sexo.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
