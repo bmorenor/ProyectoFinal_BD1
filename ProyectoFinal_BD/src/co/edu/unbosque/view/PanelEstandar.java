@@ -29,7 +29,8 @@ public class PanelEstandar extends JPanel {
 	private PanelCliente_NuevoR panelCliente_NuevoR;
 	private PanelMenu_Admin panelMenu_Admin;
 	private PanelTabla panelTabla;
-	
+	private PanelRegistro_Mascota panelRegistro_Mascota;
+	private PanelRegistro_Servicio panelRegistro_Servicio;
 	private JLabel vacio;
 	private URL imagen;
 
@@ -50,7 +51,16 @@ public class PanelEstandar extends JPanel {
 		panelTabla = new PanelTabla();
 		panelTabla.setVisible(false);
 		panelTabla.setOpaque(false);
-	
+		
+		panelRegistro_Mascota = new PanelRegistro_Mascota();
+		panelRegistro_Mascota.setVisible(false);
+		panelRegistro_Mascota.setOpaque(true);
+		panelRegistro_Mascota.setBackground(Color.white);
+		
+		panelRegistro_Servicio = new PanelRegistro_Servicio();
+		panelRegistro_Servicio.setVisible(false);
+		panelRegistro_Servicio.setOpaque(true);
+		panelRegistro_Servicio.setBackground(Color.white);
 
 		panelRegistrar = new PanelRegistrar();
 		panelRegistrar.setVisible(false);
@@ -123,8 +133,26 @@ public class PanelEstandar extends JPanel {
 		add(panelEliminar);
 		add(panelAdmin_Menu);
 		add(panelMenu_Admin);
+		add(panelRegistro_Mascota);
+		add(panelRegistro_Servicio);
 		
 
+	}
+
+	public PanelRegistro_Servicio getPanelRegistro_Servicio() {
+		return panelRegistro_Servicio;
+	}
+
+	public void setPanelRegistro_Servicio(PanelRegistro_Servicio panelRegistro_Servicio) {
+		this.panelRegistro_Servicio = panelRegistro_Servicio;
+	}
+
+	public PanelRegistro_Mascota getPanelRegistro_Mascota() {
+		return panelRegistro_Mascota;
+	}
+
+	public void setPanelRegistro_Mascota(PanelRegistro_Mascota panelRegistro_Mascota) {
+		this.panelRegistro_Mascota = panelRegistro_Mascota;
 	}
 
 	public void paintComponent(Graphics g) {

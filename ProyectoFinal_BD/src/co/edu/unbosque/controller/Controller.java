@@ -28,14 +28,13 @@ public class Controller implements ActionListener {
 	public Usuario cliente;
 	public UsuarioDAO clienteDAO;
 	public Cliente_Telefono cliente_Telefono;
-	public DefaultTableModel dftable = (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
+	public DefaultTableModel dftable;
 	public static boolean a = true;
 
 	public Controller() throws ParseException {
 		vistaP = new VistaPrincipal();
 		bd = new PostgresBD();
 		clienteDAO = new UsuarioDAO();
-		
 
 		listener(this);
 
@@ -59,6 +58,17 @@ public class Controller implements ActionListener {
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getAceptar().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getVolver().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getVerContraseña().addActionListener(escuchador);
+		// SESION USUARIO-MASCOTAS
+		vistaP.getPanelEstandar().getPanelMenu_Usuario().getCerrarSesion().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Usuario().getSalir().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Usuario().getVerMascota().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Usuario().getHistorialServicio().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Usuario().getAñadirMascota().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Usuario().getSolicitudServicio().addActionListener(escuchador);
+		//Usuario -mascota
+		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAceptar().addActionListener(escuchador);
+		//Usuario -servicio
+				vistaP.getPanelEstandar().getPanelRegistro_Servicio().getAceptar().addActionListener(escuchador);
 		// Menu ADMIN
 		vistaP.getPanelEstandar().getPanelAdmin_Menu().getCuenta().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelAdmin_Menu().getVolver().addActionListener(escuchador);
@@ -136,6 +146,24 @@ public class Controller implements ActionListener {
 				a = true;
 			}
 		}
+		//PANEL USUARIO _ MASCOTAS; SERVICIOS
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getCerrarSesion()) {
+
+				vistaP.mostrarMensaje("Hasta Pronto");
+				vistaP.getPanelEstandar().getPanelMenu_Usuario().setVisible(false);
+				vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
+				
+		}
+		if(botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getAñadirMascota()) {
+			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(true);
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
+			vistaP.getPanelEstandar().getPanelRegistro_Servicio().setVisible(false);
+			
+		}
+		if(botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAceptar()) {
+			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(true);
+			
+		}
 		// REGISTRAR CLIENTE
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelCliente_NuevoR().getAceptar()) {
 
@@ -157,8 +185,9 @@ public class Controller implements ActionListener {
 						if(clienteDAO.verificarUsuario(cliente)==true) {
 							clienteDAO.registrarCliente(cliente, cliente_Telefono);
 							vistaP.mostrarMensaje("Registrado con exito");
-							vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(false);
-							vistaP.getPanelEstandar().getPanelCliente_NuevoR().setVisible(true);
+							vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
+							vistaP.getPanelEstandar().getPanelCliente_NuevoR().setVisible(false);
+						
 							borrarCampos();
 						
 						}else {
@@ -254,6 +283,8 @@ public class Controller implements ActionListener {
 		// SESION ADMIN VISUALIZACION
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Admin().getCliente()) {
 			
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+			
 			vistaP.getPanelEstandar().getPanelTabla().getTabla().setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
 			}, new String[] { "ID", "Nombres","Apellidos","Direccion","Documento","Correo","Usuario" }));
@@ -262,7 +293,7 @@ public class Controller implements ActionListener {
 			ArrayList<Usuario>miUsuario = clienteDAO.listaUsuarios();
 			
 			for(int i=0; i< miUsuario.size();i++) {
-				
+				dftable =  (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
 				String nombres = miUsuario.get(i).getNombres();
 				String apellidos = miUsuario.get(i).getApellidos();
 				String direccion = miUsuario.get(i).getDireccion();
@@ -275,7 +306,7 @@ public class Controller implements ActionListener {
 			}
 			
 			
-			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+			
 		}
 
 	}
@@ -299,20 +330,21 @@ public class Controller implements ActionListener {
 
 			registro = true;
 		} else {
-			
+
 			registro = false;
 		}
 		return registro;
 
 	}
-	
+
 	public void borrarCampos() {
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getNombresT().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getApellidosT().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDireccionT().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getCorreoT().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDocumentoT().setText("");
-		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getTelefonosT().setText("");;
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getTelefonosT().setText("");
+		;
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().setText("");

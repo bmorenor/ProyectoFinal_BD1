@@ -206,8 +206,7 @@ public class UsuarioDAO {
 				id = res.getInt("id_usuario");
 			}
 		
-			if (usuario.equals(usuario1) && contrasenia.equals(contrasenia1) && usuario1.equals(usuario2)
-					&& rol1==rol ) {
+			if (usuario.equals(usuario1) && contrasenia.equals(contrasenia1)) {
 				verificar = true;
 		
 			}else {
