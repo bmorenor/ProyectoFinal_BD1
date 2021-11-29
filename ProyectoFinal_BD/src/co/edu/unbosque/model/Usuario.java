@@ -1,6 +1,6 @@
 package co.edu.unbosque.model;
 
-public class Cliente {
+public class Usuario {
 	
 	private String nombres;
 	private String apellidos;
@@ -10,9 +10,12 @@ public class Cliente {
 	private String usuario;
 	private String contrasenia;
 	private String estado;
+	private int id_usuario;
 	
-	
-	public Cliente(String nombres, String apellidos, String direccion, String correo, String documentoIdentidad,
+	public Usuario() {
+
+	}
+	public Usuario(String nombres, String apellidos, String direccion, String correo, String documentoIdentidad,
 			String usuario, String contraseña, String estado) {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
@@ -87,7 +90,6 @@ public class Cliente {
 
 
 
-
 	public String getContrasenia() {
 		return contrasenia;
 	}
@@ -106,6 +108,13 @@ public class Cliente {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	public int getId_usuario() {
+		return id_usuario;
+	}
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+	
 	
 	
 	

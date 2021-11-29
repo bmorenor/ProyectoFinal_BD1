@@ -3,10 +3,13 @@ package co.edu.unbosque.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 
-import co.edu.unbosque.model.Cliente;
+import javax.swing.table.DefaultTableModel;
+
+import co.edu.unbosque.model.Usuario;
 import co.edu.unbosque.model.Cliente_Telefono;
-import co.edu.unbosque.model.persistence.ClienteDAO;
+import co.edu.unbosque.model.persistence.UsuarioDAO;
 import co.edu.unbosque.model.persistence.PostgresBD;
 import co.edu.unbosque.view.VistaPrincipal;
 
@@ -22,17 +25,17 @@ public class Controller implements ActionListener {
 
 	public VistaPrincipal vistaP;
 	public PostgresBD bd;
-	public Cliente cliente;
-	public ClienteDAO clienteDAO;
+	public Usuario cliente;
+	public UsuarioDAO clienteDAO;
 	public Cliente_Telefono cliente_Telefono;
-
+	public DefaultTableModel dftable = (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
 	public static boolean a = true;
 
 	public Controller() throws ParseException {
 		vistaP = new VistaPrincipal();
 		bd = new PostgresBD();
-		clienteDAO = new ClienteDAO();
-	
+		clienteDAO = new UsuarioDAO();
+		
 
 		listener(this);
 
@@ -63,6 +66,11 @@ public class Controller implements ActionListener {
 		vistaP.getPanelEstandar().getPanelRegistro_Admin().getAceptar().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelRegistro_Admin().getVolver().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelRegistro_Admin().getVerContraseña().addActionListener(escuchador);
+		// Menu de visualizacion ADMIN
+		vistaP.getPanelEstandar().getPanelMenu_Admin().getCliente().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Admin().getMascota().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Admin().getHistorialServicios().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Admin().getSalir().addActionListener(escuchador);
 
 	}
 
@@ -143,7 +151,7 @@ public class Controller implements ActionListener {
 			String estado = "A";
 			if(verificarRegistroCliente()==true) {
 				if(contraseña1.equals(contraseña2)) {
-					cliente = new Cliente(nombres, apellidos, direccion, correo, documento, usuario, contraseña2,estado);
+					cliente = new Usuario(nombres, apellidos, direccion, correo, documento, usuario, contraseña2,estado);
 					cliente_Telefono =  new Cliente_Telefono(telefono, estado);
 					if(clienteDAO.verificarNumeros(cliente_Telefono)==true) {
 						if(clienteDAO.verificarUsuario(cliente)==true) {
@@ -209,7 +217,23 @@ public class Controller implements ActionListener {
 		}
 		// SESION ADMIN
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Admin().getAceptar()) {
-
+			if(!vistaP.getPanelEstandar().getPanelRegistro_Admin().getUsuario().getText().equals("") &&
+					!vistaP.getPanelEstandar().getPanelRegistro_Admin().getPassword().getPassword().equals(null)) {
+				
+				String usuario = vistaP.getPanelEstandar().getPanelRegistro_Admin().getUsuario().getText();
+				String constrasenia = new String(vistaP.getPanelEstandar().getPanelRegistro_Admin().getPassword().getPassword());
+				
+				if(clienteDAO.verificarAdminInicio(constrasenia, usuario)) {
+					vistaP.mostrarMensaje("Bienvenido: "+usuario);
+					vistaP.getPanelEstandar().getPanelRegistro_Admin().setVisible(false);
+					vistaP.getPanelEstandar().getPanelMenu_Admin().setVisible(true);
+				}else {
+					vistaP.mostrarError("Verifique los campos");
+				}
+				
+			}else {
+				vistaP.mostrarError("Verifique los campos");
+			}
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Admin().getVolver()) {
 			vistaP.getPanelEstandar().getPanelRegistro_Admin().setVisible(false);
@@ -226,6 +250,32 @@ public class Controller implements ActionListener {
 				a = true;
 			}
 
+		}
+		// SESION ADMIN VISUALIZACION
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Admin().getCliente()) {
+			
+			vistaP.getPanelEstandar().getPanelTabla().getTabla().setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+			}, new String[] { "ID", "Nombres","Apellidos","Direccion","Documento","Correo","Usuario" }));
+			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1().setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
+
+			ArrayList<Usuario>miUsuario = clienteDAO.listaUsuarios();
+			
+			for(int i=0; i< miUsuario.size();i++) {
+				
+				String nombres = miUsuario.get(i).getNombres();
+				String apellidos = miUsuario.get(i).getApellidos();
+				String direccion = miUsuario.get(i).getDireccion();
+				String documento = miUsuario.get(i).getDocumentoIdentidad();
+				int id = miUsuario.get(i).getId_usuario();
+				String correo = miUsuario.get(i).getCorreo();
+				String usuario = miUsuario.get(i).getUsuario();
+				Object[] obj = { id, nombres,apellidos,direccion,documento,correo,usuario};
+				dftable.addRow(obj);
+			}
+			
+			
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
 		}
 
 	}

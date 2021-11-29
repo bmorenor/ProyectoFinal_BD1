@@ -27,6 +27,8 @@ public class PanelEstandar extends JPanel {
 	private PanelRegistro_Admin panelRegistro_Admin;
 	private PanelMenu_Usuario panelMenu_Usuario;
 	private PanelCliente_NuevoR panelCliente_NuevoR;
+	private PanelMenu_Admin panelMenu_Admin;
+	private PanelTabla panelTabla;
 	
 	private JLabel vacio;
 	private URL imagen;
@@ -44,6 +46,11 @@ public class PanelEstandar extends JPanel {
 		
 		setLayout(new FlowLayout());
 		vacio = new JLabel("");
+		
+		panelTabla = new PanelTabla();
+		panelTabla.setVisible(false);
+		panelTabla.setOpaque(false);
+	
 
 		panelRegistrar = new PanelRegistrar();
 		panelRegistrar.setVisible(false);
@@ -93,12 +100,17 @@ public class PanelEstandar extends JPanel {
 		panelActualizar.setVisible(false);
 		panelActualizar.setOpaque(false);
 		
+		panelMenu_Admin = new PanelMenu_Admin();
+		panelMenu_Admin.setVisible(false);
+		panelMenu_Admin.setOpaque(false);
+		
 		panelCliente_NuevoR = new PanelCliente_NuevoR();
 		panelCliente_NuevoR.setVisible(false);
 		panelCliente_NuevoR.setOpaque(true);
 		panelCliente_NuevoR.setBackground(Color.white);
 		
 		add(panelMenu);
+		add(panelTabla);
 		add(panelCliente_NuevoR);
 		add(panelCliente_Menu);
 		add(panelRegistrar);
@@ -110,6 +122,7 @@ public class PanelEstandar extends JPanel {
 //		add(vacio);
 		add(panelEliminar);
 		add(panelAdmin_Menu);
+		add(panelMenu_Admin);
 		
 
 	}
@@ -234,6 +247,23 @@ public class PanelEstandar extends JPanel {
 	public void setPanelCliente_NuevoR(PanelCliente_NuevoR panelCliente_NuevoR) {
 		this.panelCliente_NuevoR = panelCliente_NuevoR;
 	}
+
+	public PanelMenu_Admin getPanelMenu_Admin() {
+		return panelMenu_Admin;
+	}
+
+	public void setPanelMenu_Admin(PanelMenu_Admin panelMenu_Admin) {
+		this.panelMenu_Admin = panelMenu_Admin;
+	}
+
+	public PanelTabla getPanelTabla() {
+		return panelTabla;
+	}
+
+	public void setPanelTabla(PanelTabla panelTabla) {
+		this.panelTabla = panelTabla;
+	}
+	
 
 
 	
