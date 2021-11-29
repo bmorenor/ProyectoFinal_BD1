@@ -269,6 +269,8 @@ public class UsuarioDAO {
 			if (usuario.equals(usuario1) && contrasenia.equals(contrasenia1)) {
 				verificar = true;
 				
+			}else {
+				verificar = false;
 			}
 			PreparedStatement consulta2 = bd.getConnection().prepareStatement("select a.id_rol, b.nombre_usuario from rol a,usuario b where a.id_rol =b.rol_usuario\r\n"
 					+ " and b.rol_usuario = " + 2 + ""
@@ -282,6 +284,8 @@ public class UsuarioDAO {
 			if(usuario1.equals(usuario2)
 					&& rol1==rol) {
 				verificar = true;
+			}else {
+				verificar = false;
 			}
 			
 			res.close();

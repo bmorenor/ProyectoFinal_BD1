@@ -5,9 +5,9 @@ import java.sql.*;
 public class PostgresBD {
 	
 	String bd = "TrabajoFinal";
-	String host = "192.168.10.14";
+	String host = "192.168.10.15";
 	String usuario = "postgres";
-	String url = "jdbc:postgresql://192.168.10.14/TrabajoFinal";
+	String url = "jdbc:postgresql://192.168.10.15/TrabajoFinal";
 	String contraseña = "12345";
 	
     private Connection connection = null;

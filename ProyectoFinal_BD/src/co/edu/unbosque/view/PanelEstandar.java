@@ -49,6 +49,7 @@ public class PanelEstandar extends JPanel {
 		vacio = new JLabel("");
 		
 		panelTabla = new PanelTabla();
+		panelTabla.setPreferredSize(new Dimension(500, 800));
 		panelTabla.setVisible(false);
 		panelTabla.setOpaque(false);
 		

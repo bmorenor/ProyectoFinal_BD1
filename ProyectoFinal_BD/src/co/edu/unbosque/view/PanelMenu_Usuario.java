@@ -20,7 +20,7 @@ public class PanelMenu_Usuario extends JPanel {
 
 	public PanelMenu_Usuario() {
 
-		setLayout(new GridLayout(7, 1, 20, 20));
+		setLayout(new GridLayout(7, 1, 10, 10));
 		
 		vacio = new JButton("VACIO");
 		vacio.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));

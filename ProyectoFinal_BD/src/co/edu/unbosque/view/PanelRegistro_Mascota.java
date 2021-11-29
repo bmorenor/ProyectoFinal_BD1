@@ -35,7 +35,7 @@ public class PanelRegistro_Mascota extends JPanel {
 	
 	public PanelRegistro_Mascota() {
 
-		setLayout(new GridLayout(10, 2,0,0));
+		setLayout(new GridLayout(9, 2,0,0));
 
 		vacio = new JButton("VACIO");
 		vacio.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));

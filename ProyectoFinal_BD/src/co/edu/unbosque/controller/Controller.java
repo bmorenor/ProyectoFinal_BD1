@@ -164,7 +164,9 @@ public class Controller implements ActionListener {
 
 			vistaP.mostrarMensaje("Hasta Pronto");
 			vistaP.getPanelEstandar().getPanelMenu_Usuario().setVisible(false);
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
 			vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
+
 
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getAñadirMascota()) {
@@ -177,21 +179,62 @@ public class Controller implements ActionListener {
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAceptar()) {
 			if(verificarRegistroMascota()) {
 				String nombre=vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().getText();
-				String anno_nacimiento=vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAnno_NacimientoL().getText();
+				String anno_nacimiento=vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAnno_NacimientoT().getText();
 				String peso=vistaP.getPanelEstandar().getPanelRegistro_Mascota().getPesoT().getText();
-				String color= vistaP.getPanelEstandar().getPanelRegistro_Mascota().getColorT().getText();
+				String color1= vistaP.getPanelEstandar().getPanelRegistro_Mascota().getColorT().getText();
 				String sexo= (String) vistaP.getPanelEstandar().getPanelRegistro_Mascota().getSexo().getSelectedItem();
-				String raza= vistaP.getPanelEstandar().getPanelRegistro_Mascota().getRazaT().getText();
-				String especie= vistaP.getPanelEstandar().getPanelRegistro_Mascota().getEspecieT().getText(); 
+				String raza1= vistaP.getPanelEstandar().getPanelRegistro_Mascota().getRazaT().getText();
+				String especie1= vistaP.getPanelEstandar().getPanelRegistro_Mascota().getEspecieT().getText(); 
 				String estado = "A";
 				
-				mascota = new Mascota(nombre, color, especie, anno_nacimiento, raza, peso, estado, sexo);
+				mascota = new Mascota(nombre, color1, especie1, anno_nacimiento, raza1, peso, estado, sexo);
+				raza = new Mascota_Raza(raza1);
+				color = new Mascota_Color(color1);
+				especie = new Mascota_especie(especie1);
+				
+				mascotaDAO.registrarDatosM(color, especie, raza);
+				if(mascotaDAO.registrarMascota(mascota)==false) {
+					vistaP.mostrarMensaje("Se registro exitosamente");
+					borrarCampos();
+				}else {
+					vistaP.mostrarError("Hay un fallo");
+				}
+				
 				
 			}else {
 				vistaP.mostrarError("Por favor ingrese todos los campos");
 			}
 			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(true);
 
+		}
+		if(botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getVerMascota()) {
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(false);
+
+			vistaP.getPanelEstandar().getPanelTabla().getTabla()
+					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie","Año Nacimiento", "Id_cliente" }));
+			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
+					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
+
+			ArrayList<Mascota> miMascota = mascotaDAO.listaMascotasUsuario();
+
+			for (int i = 0; i < miMascota.size(); i++) {
+				dftable = (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
+				String nombre = miMascota.get(i).getNombre();
+				String peso = miMascota.get(i).getPeso();
+				String color = miMascota.get(i).getColor();
+				String raza = miMascota.get(i).getRaza();
+				int id = miMascota.get(i).getId_mascota();
+				String especie = miMascota.get(i).getEspecie();
+				int usuario = miMascota.get(i).getId_cliente();
+				String anno_naciemiento = miMascota.get(i).getAnno_nacimiento();
+				Object[] obj = { id, nombre, peso, color, raza, especie, anno_naciemiento,usuario};
+				dftable.addRow(obj);
+			}
+
+		
 		}
 		// REGISTRAR CLIENTE
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelCliente_NuevoR().getAceptar()) {
@@ -285,8 +328,9 @@ public class Controller implements ActionListener {
 
 				if (clienteDAO.verificarAdminInicio(constrasenia, usuario)) {
 					vistaP.mostrarMensaje("Bienvenido: " + usuario);
-					vistaP.getPanelEstandar().getPanelRegistro_Admin().setVisible(false);
 					vistaP.getPanelEstandar().getPanelMenu_Admin().setVisible(true);
+					vistaP.getPanelEstandar().getPanelRegistro_Admin().setVisible(false);
+					
 				} else {
 					vistaP.mostrarError("Verifique los campos");
 				}
@@ -338,6 +382,33 @@ public class Controller implements ActionListener {
 				dftable.addRow(obj);
 			}
 
+		}
+		if(botonPulsado== vistaP.getPanelEstandar().getPanelMenu_Admin().getMascota()) {
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+			
+
+			vistaP.getPanelEstandar().getPanelTabla().getTabla()
+					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie","Año Nacimiento", "Id_cliente" }));
+			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
+					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
+
+			ArrayList<Mascota> miMascota = mascotaDAO.listaMascotas();
+
+			for (int i = 0; i < miMascota.size(); i++) {
+				dftable = (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
+				String nombre = miMascota.get(i).getNombre();
+				String peso = miMascota.get(i).getPeso();
+				String color = miMascota.get(i).getColor();
+				String raza = miMascota.get(i).getRaza();
+				int id = miMascota.get(i).getId_mascota();
+				String especie = miMascota.get(i).getEspecie();
+				int usuario = miMascota.get(i).getId_cliente();
+				String anno_naciemiento = miMascota.get(i).getAnno_nacimiento();
+				Object[] obj = { id, nombre, peso, color, raza, especie, anno_naciemiento,usuario};
+				dftable.addRow(obj);
+			}
 		}
 
 	}
@@ -400,6 +471,15 @@ public class Controller implements ActionListener {
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().setText("");
+		
+		
+		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().setText("");
+		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getColorT().setText("");
+		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getRazaT().setText("");
+		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getEspecieT().setText("");
+		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getPesoT().setText("");
+		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAnno_NacimientoT().setText("");
+	
 	}
 
 }
