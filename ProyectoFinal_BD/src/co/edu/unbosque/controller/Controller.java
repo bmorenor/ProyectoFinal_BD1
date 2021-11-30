@@ -114,6 +114,7 @@ public class Controller implements ActionListener {
 		vistaP.getPanelEstandar().getPanelMenu_Admin().getMascota().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Admin().getHistorialServicios().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Admin().getSalir().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Admin().getFacturas().addActionListener(escuchador);
 
 	}
 
@@ -189,14 +190,7 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
 
 		}
-		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getFacturas()) {
 
-			vistaP.mostrarMensaje("Hasta Pronto");
-			vistaP.getPanelEstandar().getPanelMenu_Usuario().setVisible(false);
-			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
-			vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
-
-		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getSolicitudServicio()) {
 
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
@@ -337,6 +331,35 @@ public class Controller implements ActionListener {
 				dftable.addRow(obj);
 			}
 			nombreArchivo = "Historial_Usuario_"+UsuarioDAO.id;
+		}
+		if(botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getFacturas()) {
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(false);
+			vistaP.getPanelEstandar().getPanelRegistro_Servicio().setVisible(false);
+
+			vistaP.getPanelEstandar().getPanelTabla().getTabla()
+					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+					}, new String[] { "ID_factura","Fecha", "Mascota", "Servicio", "Descuento","Iva%", "Total"}));
+			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
+					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
+
+			ArrayList<Factura_Detalle> miFactura = historiaDAO.listaFacturaUsuario(UsuarioDAO.id);
+			int id_factura=0;
+			for (int i = 0; i < miFactura.size(); i++) {
+				dftable = (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
+				id_factura = miFactura.get(i).getId_factura();
+				String fecha = miFactura.get(i).getFecha();
+				String mascota = miFactura.get(i).getMascota();
+				String servicio = miFactura.get(i).getServicio();
+				int iva =  miFactura.get(i).getIva();
+				int total = miFactura.get(i).getTotal();
+				int descuento = miFactura.get(i).getDescuento();
+	
+				Object[] obj = { id_factura, fecha, mascota, servicio, descuento, iva,total};
+				dftable.addRow(obj);
+			}
+			nombreArchivo = "Factura_"+id_factura+"Usuario_"+UsuarioDAO.id;
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getSalir()) {
 
@@ -545,6 +568,35 @@ public class Controller implements ActionListener {
 				dftable.addRow(obj);
 			}
 			nombreArchivo = "TodasLasMascotas";
+		}if(botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Admin().getFacturas()) {
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(false);
+			vistaP.getPanelEstandar().getPanelRegistro_Servicio().setVisible(false);
+
+			vistaP.getPanelEstandar().getPanelTabla().getTabla()
+					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+					}, new String[] { "ID_factura","ID_usuario","Fecha", "Mascota", "Servicio", "Descuento","Iva%", "Total"}));
+			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
+					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
+
+			ArrayList<Factura_Detalle> miFactura = historiaDAO.listaFactura();
+			int id_factura=0;
+			for (int i = 0; i < miFactura.size(); i++) {
+				dftable = (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
+				id_factura = miFactura.get(i).getId_factura();
+				String fecha = miFactura.get(i).getFecha();
+				String mascota = miFactura.get(i).getMascota();
+				String servicio = miFactura.get(i).getServicio();
+				int iva =  miFactura.get(i).getIva();
+				int total = miFactura.get(i).getTotal();
+				int descuento = miFactura.get(i).getDescuento();
+				int id_usuario = miFactura.get(i).getId_usuario();
+	
+				Object[] obj = { id_factura,id_usuario, fecha, mascota, servicio, descuento, iva,total};
+				dftable.addRow(obj);
+			}
+			nombreArchivo = "Factura_Usuarios";
 		}
 
 		// PDF
