@@ -14,11 +14,11 @@ public class PanelMenu_Admin extends JPanel {
 	private JButton historialServicios;
 	private JButton consultarRegistros;
 	private JButton salir;
-	private JButton actualizar;
+	private JButton facturas;
 
 	public PanelMenu_Admin() {
 
-		setLayout(new GridLayout(5, 1, 40, 40));
+		setLayout(new GridLayout(6, 1, 10, 10));
 
 		vacio = new JButton("VACIO");
 		vacio.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
@@ -34,9 +34,13 @@ public class PanelMenu_Admin extends JPanel {
 		mascota.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		mascota.setEnabled(true);
 
-		historialServicios = new JButton("Ver registros");
+		historialServicios = new JButton("Ver historial");
 		historialServicios.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		historialServicios.setEnabled(true);
+		
+		facturas = new JButton("Ver facturas");
+		facturas.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		facturas.setEnabled(true);
 
 		salir = new JButton("Salir");
 		salir.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
@@ -47,6 +51,7 @@ public class PanelMenu_Admin extends JPanel {
 
 		add(mascota);
 		add(historialServicios);
+		add(facturas);
 
 		add(salir);
 
@@ -100,12 +105,14 @@ public class PanelMenu_Admin extends JPanel {
 		this.salir = salir;
 	}
 
-	public JButton getActualizar() {
-		return actualizar;
+	public JButton getFacturas() {
+		return facturas;
 	}
 
-	public void setActualizar(JButton actualizar) {
-		this.actualizar = actualizar;
+	public void setFacturas(JButton facturas) {
+		this.facturas = facturas;
 	}
+
+
 
 }
