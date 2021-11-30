@@ -208,7 +208,7 @@ public class Controller implements ActionListener {
 		// SERVICIO GUARDADO
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Servicio().getAceptar()) {
 
-			SimpleDateFormat dformat = new SimpleDateFormat("DD-MM-YYYY");
+			SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-YYYY");
 			String fecha1 = dformat.format(vistaP.getPanelEstandar().getPanelRegistro_Servicio().getFechaD().getDate());
 			if (verificarSolicitudServicio() && !fecha1.equals("")) {
 				String dia = fecha1.split("-")[0];
@@ -228,7 +228,7 @@ public class Controller implements ActionListener {
 				int iva = 19;
 				
 				historia = new Historia(id_mascota, descripcion);
-				factura = new Factura(fecha, mascota);
+				factura = new Factura(fecha, formaPago);
 				factura_Detalle = new Factura_Detalle(iva, servicio);
 				
 				historiaDAO.registrarDatosHistoria(historia, factura, factura_Detalle);
@@ -282,7 +282,7 @@ public class Controller implements ActionListener {
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getVerMascota()) {
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
 			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(false);
-
+			vistaP.getPanelEstandar().getPanelRegistro_Servicio().setVisible(false);
 			vistaP.getPanelEstandar().getPanelTabla().getTabla()
 					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
@@ -309,6 +309,34 @@ public class Controller implements ActionListener {
 			}
 			nombreArchivo = "MascotaCliente " + id_usuario + "";
 
+		}
+		if(botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getHistorialServicio()) {
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(false);
+			vistaP.getPanelEstandar().getPanelRegistro_Servicio().setVisible(false);
+
+			vistaP.getPanelEstandar().getPanelTabla().getTabla()
+					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+					}, new String[] { "ID_historia","Fecha", "Mascota", "Servicio", "Total", "Descripcion"}));
+			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
+					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
+
+			ArrayList<Historia> miHistoria = historiaDAO.listaHistoriaUsuario(UsuarioDAO.id);
+
+			for (int i = 0; i < miHistoria.size(); i++) {
+				dftable = (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
+				int id_historia = miHistoria.get(i).getId_historia();
+				String fecha = miHistoria.get(i).getFecha();
+				String mascota = miHistoria.get(i).getMascota();
+				String servicio = miHistoria.get(i).getServicio();
+				int total = miHistoria.get(i).getTotal();
+				String descripcion = miHistoria.get(i).getDescripcion();
+	
+				Object[] obj = { id_historia, fecha, mascota, servicio, total, descripcion};
+				dftable.addRow(obj);
+			}
+			nombreArchivo = "Historial_Usuario_"+UsuarioDAO.id;
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getSalir()) {
 
@@ -462,6 +490,33 @@ public class Controller implements ActionListener {
 				dftable.addRow(obj);
 			}
 			nombreArchivo = "TodosLosClientes";
+		}
+		if(botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Admin().getHistorialServicios()) {
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+
+			vistaP.getPanelEstandar().getPanelTabla().getTabla()
+					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+
+					}, new String[] { "ID_historia","Fecha", "Mascota", "Servicio", "Total", "Descripcion", "id_usuario"}));
+			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
+					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
+
+			ArrayList<Historia> miHistoria = historiaDAO.listaHistoria();
+
+			for (int i = 0; i < miHistoria.size(); i++) {
+				dftable = (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
+				int id_historia = miHistoria.get(i).getId_historia();
+				String fecha = miHistoria.get(i).getFecha();
+				String mascota = miHistoria.get(i).getMascota();
+				String servicio = miHistoria.get(i).getServicio();
+				int total = miHistoria.get(i).getTotal();
+				int id_usuario = miHistoria.get(i).getId_usuario();
+				String descripcion = miHistoria.get(i).getDescripcion();
+	
+				Object[] obj = { id_historia, fecha, mascota, servicio, total, descripcion,id_usuario};
+				dftable.addRow(obj);
+			}
+			nombreArchivo = "Historial_Usuarios";
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Admin().getMascota()) {
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);

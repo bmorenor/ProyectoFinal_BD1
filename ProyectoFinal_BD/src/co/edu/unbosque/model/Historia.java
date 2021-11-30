@@ -6,9 +6,13 @@ public class Historia {
 	private int id_mascota;
 	private int id_factura_detalle;
 	private String descripcion;
+	private String servicio;
+	private int total;
+	private String mascota;
 	private String fecha;
 	private int valor_total;
 	private String estado;
+	private int id_usuario;
 	
 	public Historia() {
 
@@ -76,5 +80,38 @@ public class Historia {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
+	public String getServicio() {
+		return servicio;
+	}
+
+	public void setServicio(String servicio) {
+		this.servicio = servicio;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public String getMascota() {
+		return mascota;
+	}
+
+	public void setMascota(String mascota) {
+		this.mascota = mascota;
+	}
+
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
+	}
+	
 
 }
