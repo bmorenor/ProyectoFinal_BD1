@@ -4,7 +4,7 @@ public class Factura_Detalle {
 	private int id_factura_detalle;
 	private int iva;
 	private int id_factura;
-	private int id_servicio;
+	private String servicio;
 	private int total;
 	
 	
@@ -12,12 +12,12 @@ public class Factura_Detalle {
 	public Factura_Detalle() {
 		
 	}
-	public Factura_Detalle(int iva, int id_factura, int id_servicio, int total) {
+	public Factura_Detalle(int iva,  String servicio) {
 
 		this.iva = iva;
-		this.id_factura = id_factura;
-		this.id_servicio = id_servicio;
-		this.total = total;
+	
+		this.servicio = servicio;
+
 	}
 	
 	
@@ -39,11 +39,12 @@ public class Factura_Detalle {
 	public void setId_factura(int id_factura) {
 		this.id_factura = id_factura;
 	}
-	public int getId_servicio() {
-		return id_servicio;
+
+	public String getServicio() {
+		return servicio;
 	}
-	public void setId_servicio(int id_servicio) {
-		this.id_servicio = id_servicio;
+	public void setServicio(String servicio) {
+		this.servicio = servicio;
 	}
 	public int getTotal() {
 		return total;

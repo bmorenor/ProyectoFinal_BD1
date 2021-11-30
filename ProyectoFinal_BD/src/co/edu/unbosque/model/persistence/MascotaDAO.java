@@ -376,4 +376,104 @@ public class MascotaDAO {
 		}
 		return miMascota;
 	}
+	public int buscarMascota(int id_usuario,String nombre) {
+		boolean validar = false;
+		bd.connectDatabase();
+		int id=0;
+
+		try {
+			PreparedStatement consulta = bd.getConnection()
+					.prepareStatement("select id_mascota from mascota where nombre = '" + nombre + "'"
+							+ "and  id_usuario ="+id_usuario);
+			ResultSet res = consulta.executeQuery();
+			
+			if (res.next()) {
+				id = res.getInt("id_mascota");
+
+			}
+		
+
+	
+
+			res.close();
+			consulta.close();
+
+			statement.close();
+			bd.cierraConexion();
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return id;
+		
+	}
+	
+	public ArrayList<Mascota> listaMascotasUsuario(int id_usuario){
+		bd.connectDatabase();
+		ArrayList<Mascota>miMascota = new ArrayList<Mascota>();
+		int color=0;
+		int raza=0;
+		int especie=0;
+		try {
+			PreparedStatement consulta = bd.getConnection().prepareStatement(
+					"select * from mascota where id_usuario="+id_usuario);
+
+			ResultSet res = consulta.executeQuery();
+			
+	
+
+			while (res.next()) {
+				Mascota mascota =  new Mascota();
+				mascota.setId_cliente(res.getInt("id_usuario"));
+				mascota.setNombre(res.getString("nombre"));
+				mascota.setAnno_nacimiento(res.getString("anno_nacimiento"));
+				mascota.setPeso(res.getString("peso"));
+				color=(res.getInt("color"));
+				PreparedStatement consulta2 = bd.getConnection().prepareStatement(
+						"select tipo_color from color where id_color = "+color);
+
+				ResultSet res2 = consulta2.executeQuery();
+				if(res2.next()) {
+					mascota.setColor(res2.getString("tipo_color"));
+				}
+				raza = res.getInt("raza");
+				PreparedStatement consulta3 = bd.getConnection().prepareStatement(
+						"select tipo_raza from raza where id_raza = "+raza);
+
+				ResultSet res3 = consulta3.executeQuery();
+				if(res3.next()) {
+					mascota.setRaza(res3.getString("tipo_raza"));
+				}
+				especie = res.getInt("especie");
+				PreparedStatement consulta4 = bd.getConnection().prepareStatement(
+						"select tipo_especie from especie where id_especie = "+especie);
+
+				ResultSet res4 = consulta4.executeQuery();
+				if(res4.next()) {
+					mascota.setEspecie(res4.getString("tipo_especie"));
+				}
+
+				mascota.setSexo(res.getString("sexo"));
+		
+				
+	
+				miMascota.add(mascota);
+				res2.close();
+				consulta2.close();
+				res3.close();
+				consulta3.close();
+				res4.close();
+				consulta4.close();
+			}
+
+			res.close();
+			consulta.close();
+			bd.cierraConexion();
+
+		} catch (Exception e) {
+			e.getStackTrace();
+
+		}
+		return miMascota;
+	}
 }

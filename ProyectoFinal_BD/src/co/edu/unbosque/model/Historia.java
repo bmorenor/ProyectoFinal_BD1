@@ -14,15 +14,11 @@ public class Historia {
 
 	}
 
-	public Historia(int id_mascota, int id_factura_detalle, String descripcion, String fecha, int valor_total,
-			String estado) {
-		super();
+	public Historia(int id_mascota, String descripcion) {
 		this.id_mascota = id_mascota;
-		this.id_factura_detalle = id_factura_detalle;
+
 		this.descripcion = descripcion;
-		this.fecha = fecha;
-		this.valor_total = valor_total;
-		this.estado = estado;
+
 	}
 
 	public int getId_historia() {

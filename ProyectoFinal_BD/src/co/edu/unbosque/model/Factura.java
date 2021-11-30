@@ -11,11 +11,11 @@ public class Factura {
 		
 	}
 	
-	public Factura(String fecha, String forma_pago, String estado) {
+	public Factura(String fecha, String forma_pago) {
 	
 		this.fecha = fecha;
 		this.forma_pago = forma_pago;
-		this.estado = estado;
+	
 	}
 	
 	public int getId_facura() {

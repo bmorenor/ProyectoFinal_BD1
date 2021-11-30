@@ -14,11 +14,16 @@ import javax.swing.table.DefaultTableModel;
 import co.edu.unbosque.model.Usuario;
 import co.edu.unbosque.model.file.Pdf;
 import co.edu.unbosque.model.Cliente_Telefono;
+import co.edu.unbosque.model.Factura;
+import co.edu.unbosque.model.Factura_Detalle;
+import co.edu.unbosque.model.Historia;
 import co.edu.unbosque.model.Mascota;
 import co.edu.unbosque.model.Mascota_Color;
 import co.edu.unbosque.model.Mascota_Raza;
 import co.edu.unbosque.model.Mascota_especie;
+import co.edu.unbosque.model.Servicio;
 import co.edu.unbosque.model.persistence.UsuarioDAO;
+import co.edu.unbosque.model.persistence.HistoriaDAO;
 import co.edu.unbosque.model.persistence.MascotaDAO;
 import co.edu.unbosque.model.persistence.PostgresBD;
 import co.edu.unbosque.view.VistaPrincipal;
@@ -44,16 +49,23 @@ public class Controller implements ActionListener {
 	public Mascota_Raza raza;
 	public Mascota_especie especie;
 	public DefaultTableModel dftable;
+	public Historia historia;
+	public Factura factura;
+	public Factura_Detalle factura_Detalle;
+	public HistoriaDAO historiaDAO;
+	public Servicio servicio;
 	public Pdf pdf;
 	public static boolean a = true;
-	public static String nombreArchivo="";
+	public static String nombreArchivo = "";
 
 	public Controller() throws ParseException {
 		vistaP = new VistaPrincipal();
 		bd = new PostgresBD();
 		clienteDAO = new UsuarioDAO();
 		mascotaDAO = new MascotaDAO();
-
+		historiaDAO = new  HistoriaDAO();
+		servicio = new Servicio();
+		llenarCombos();
 		listener(this);
 
 	}
@@ -84,7 +96,7 @@ public class Controller implements ActionListener {
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getAñadirMascota().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getSolicitudServicio().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getFacturas().addActionListener(escuchador);
-		//PDF
+		// PDF
 		vistaP.getPanelEstandar().getPanelTabla().getPdf().addActionListener(escuchador);
 		// Usuario -mascota
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAceptar().addActionListener(escuchador);
@@ -176,7 +188,6 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
 			vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
 
-
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getFacturas()) {
 
@@ -185,23 +196,48 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
 			vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
 
-
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getSolicitudServicio()) {
 
-		
-			
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
+			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(false);
 			vistaP.getPanelEstandar().getPanelRegistro_Servicio().setVisible(true);
-
+			llenarCombos();
 
 		}
-		//SERVICIO GUARDADO
-	if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Servicio().getAceptar()) {
-		
-		SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-YYYY");
-		String fecha = dformat.format(vistaP.getPanelEstandar().getPanelRegistro_Servicio().getFechaD());
+		// SERVICIO GUARDADO
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Servicio().getAceptar()) {
 
+			SimpleDateFormat dformat = new SimpleDateFormat("DD-MM-YYYY");
+			String fecha1 = dformat.format(vistaP.getPanelEstandar().getPanelRegistro_Servicio().getFechaD().getDate());
+			if (verificarSolicitudServicio() && !fecha1.equals("")) {
+				String dia = fecha1.split("-")[0];
+				String mes = fecha1.split("-")[1];
+				String anno = fecha1.split("-")[2];
+
+				String fecha = anno + "-" + mes + "-" + dia;
+				String servicio = (String) vistaP.getPanelEstandar().getPanelRegistro_Servicio().getServicioC()
+						.getSelectedItem();
+
+				String formaPago = vistaP.getPanelEstandar().getPanelRegistro_Servicio().getForma_pagoT().getText();
+				String descripcion = vistaP.getPanelEstandar().getPanelRegistro_Servicio().getDescripcionT().getText();
+				String mascota = (String) vistaP.getPanelEstandar().getPanelRegistro_Servicio().getMascotaC()
+						.getSelectedItem();
+				
+				int id_mascota=mascotaDAO.buscarMascota(UsuarioDAO.id, mascota);
+				int iva = 19;
+				
+				historia = new Historia(id_mascota, descripcion);
+				factura = new Factura(fecha, mascota);
+				factura_Detalle = new Factura_Detalle(iva, servicio);
+				
+				historiaDAO.registrarDatosHistoria(historia, factura, factura_Detalle);
+				vistaP.mostrarMensaje("Factura generada correctamente");
+				llenarCombos();
+				borrarCampos();
+			}else {
+				vistaP.mostrarError("Por favor llenar correctamente");
+			}
 
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getAñadirMascota()) {
@@ -212,44 +248,46 @@ public class Controller implements ActionListener {
 		}
 		// AÑADIR MASCOTA
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAceptar()) {
-			if(verificarRegistroMascota()) {
-				String nombre=vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().getText();
-				String anno_nacimiento=vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAnno_NacimientoT().getText();
-				String peso=vistaP.getPanelEstandar().getPanelRegistro_Mascota().getPesoT().getText();
-				String color1= vistaP.getPanelEstandar().getPanelRegistro_Mascota().getColorT().getText();
-				String sexo= (String) vistaP.getPanelEstandar().getPanelRegistro_Mascota().getSexo().getSelectedItem();
-				String raza1= vistaP.getPanelEstandar().getPanelRegistro_Mascota().getRazaT().getText();
-				String especie1= vistaP.getPanelEstandar().getPanelRegistro_Mascota().getEspecieT().getText(); 
+			if (verificarRegistroMascota()) {
+				String nombre = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().getText();
+				String anno_nacimiento = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAnno_NacimientoT()
+						.getText();
+				String peso = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getPesoT().getText();
+				String color1 = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getColorT().getText();
+				String sexo = (String) vistaP.getPanelEstandar().getPanelRegistro_Mascota().getSexo().getSelectedItem();
+				String raza1 = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getRazaT().getText();
+				String especie1 = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getEspecieT().getText();
 				String estado = "A";
-				
+
 				mascota = new Mascota(nombre, color1, especie1, anno_nacimiento, raza1, peso, estado, sexo);
 				raza = new Mascota_Raza(raza1);
 				color = new Mascota_Color(color1);
 				especie = new Mascota_especie(especie1);
-				
+
 				mascotaDAO.registrarDatosM(color, especie, raza);
-				if(mascotaDAO.registrarMascota(mascota)==false) {
+				if (mascotaDAO.registrarMascota(mascota) == false) {
 					vistaP.mostrarMensaje("Se registro exitosamente");
 					borrarCampos();
-				}else {
+					llenarCombos();
+				} else {
 					vistaP.mostrarError("Hay un fallo");
 				}
-				
-				
-			}else {
+
+			} else {
 				vistaP.mostrarError("Por favor ingrese todos los campos");
 			}
 			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(true);
 
 		}
-		if(botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getVerMascota()) {
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getVerMascota()) {
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
 			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(false);
 
 			vistaP.getPanelEstandar().getPanelTabla().getTabla()
 					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie","Año Nacimiento", "Id_cliente" }));
+					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "Año Nacimiento",
+							"Id_cliente" }));
 			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
 					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
 
@@ -265,18 +303,17 @@ public class Controller implements ActionListener {
 				String especie = miMascota.get(i).getEspecie();
 				int usuario = miMascota.get(i).getId_cliente();
 				String anno_naciemiento = miMascota.get(i).getAnno_nacimiento();
-				Object[] obj = { id, nombre, peso, color, raza, especie, anno_naciemiento,usuario};
+				Object[] obj = { id, nombre, peso, color, raza, especie, anno_naciemiento, usuario };
 				dftable.addRow(obj);
 				id_usuario = usuario;
 			}
-			nombreArchivo = "MascotaCliente "+id_usuario+"";
-		
+			nombreArchivo = "MascotaCliente " + id_usuario + "";
+
 		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getSalir()) {
 
 			vistaP.mostrarMensaje("Hasta Pronto");
 			salir();
-
 
 		}
 		// REGISTRAR CLIENTE
@@ -373,7 +410,7 @@ public class Controller implements ActionListener {
 					vistaP.mostrarMensaje("Bienvenido: " + usuario);
 					vistaP.getPanelEstandar().getPanelMenu_Admin().setVisible(true);
 					vistaP.getPanelEstandar().getPanelRegistro_Admin().setVisible(false);
-					
+
 				} else {
 					vistaP.mostrarError("Verifique los campos");
 				}
@@ -424,16 +461,16 @@ public class Controller implements ActionListener {
 				Object[] obj = { id, nombres, apellidos, direccion, documento, correo, usuario };
 				dftable.addRow(obj);
 			}
-			nombreArchivo="TodosLosClientes";
+			nombreArchivo = "TodosLosClientes";
 		}
-		if(botonPulsado== vistaP.getPanelEstandar().getPanelMenu_Admin().getMascota()) {
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Admin().getMascota()) {
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
-			
 
 			vistaP.getPanelEstandar().getPanelTabla().getTabla()
 					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie","Año Nacimiento", "Id_cliente" }));
+					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "Año Nacimiento",
+							"Id_cliente" }));
 			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
 					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
 
@@ -449,22 +486,20 @@ public class Controller implements ActionListener {
 				String especie = miMascota.get(i).getEspecie();
 				int usuario = miMascota.get(i).getId_cliente();
 				String anno_naciemiento = miMascota.get(i).getAnno_nacimiento();
-				Object[] obj = { id, nombre, peso, color, raza, especie, anno_naciemiento,usuario};
+				Object[] obj = { id, nombre, peso, color, raza, especie, anno_naciemiento, usuario };
 				dftable.addRow(obj);
 			}
-			nombreArchivo="TodasLasMascotas";
+			nombreArchivo = "TodasLasMascotas";
 		}
-		
-		//PDF
-		
-		if(botonPulsado== vistaP.getPanelEstandar().getPanelTabla().getPdf()) {
-			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
-			
 
-	
+		// PDF
+
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelTabla().getPdf()) {
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+
 			pdf = new Pdf();
 			pdf.utilJTableToPdf(vistaP.getPanelEstandar().getPanelTabla().getTabla(), nombreArchivo);
-	
+
 		}
 
 	}
@@ -516,6 +551,26 @@ public class Controller implements ActionListener {
 
 	}
 
+	public boolean verificarSolicitudServicio() {
+		boolean registro = true;
+
+		if (!Objects.equals(vistaP.getPanelEstandar().getPanelRegistro_Servicio().getServicioC().getSelectedItem(),
+				"Seleccione...")
+				&& !Objects.equals(
+						vistaP.getPanelEstandar().getPanelRegistro_Servicio().getMascotaC().getSelectedItem(),
+						"Seleccione...")
+				&& !vistaP.getPanelEstandar().getPanelRegistro_Servicio().getForma_pagoT().getText().equals("")
+				&& !vistaP.getPanelEstandar().getPanelRegistro_Servicio().getDescripcionT().getText().equals("")) {
+
+			registro = true;
+		} else {
+
+			registro = false;
+		}
+		return registro;
+
+	}
+
 	public void borrarCampos() {
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getNombresT().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getApellidosT().setText("");
@@ -527,15 +582,45 @@ public class Controller implements ActionListener {
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().setText("");
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().setText("");
-		
-		
+
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().setText("");
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getColorT().setText("");
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getRazaT().setText("");
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getEspecieT().setText("");
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getPesoT().setText("");
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAnno_NacimientoT().setText("");
-	
+
+		vistaP.getPanelEstandar().getPanelRegistro_Servicio().getDescripcionT().setText("");
+		vistaP.getPanelEstandar().getPanelRegistro_Servicio().getFechaD().setToolTipText("");
+		vistaP.getPanelEstandar().getPanelRegistro_Servicio().getForma_pagoT().setText("");
+
+	}
+
+	public void llenarCombos() {
+		vistaP.getPanelEstandar().getPanelRegistro_Servicio().getMascotaC().removeAllItems();
+		vistaP.getPanelEstandar().getPanelRegistro_Servicio().getServicioC().removeAllItems();
+
+		//
+		vistaP.getPanelEstandar().getPanelRegistro_Servicio().getMascotaC().addItem("Seleccione...");
+		vistaP.getPanelEstandar().getPanelRegistro_Servicio().getServicioC().addItem("Seleccione...");
+		
+		
+		ArrayList<Mascota> miMascota = mascotaDAO.listaMascotasUsuario(UsuarioDAO.id);
+
+		for (int i = 0; i < miMascota.size(); i++) {
+			vistaP.getPanelEstandar().getPanelRegistro_Servicio().getMascotaC()
+					.addItem(miMascota.get(i).getNombre());
+
+
+		}
+		ArrayList<Servicio> miServicio = historiaDAO.listaServicio();
+
+		for (int i = 0; i < miServicio.size(); i++) {
+			vistaP.getPanelEstandar().getPanelRegistro_Servicio().getServicioC()
+					.addItem(miServicio.get(i).getNombre_servicio());
+
+
+		}
 	}
 
 }
