@@ -11,111 +11,75 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDayChooser;
+
+
 public class PanelRegistro_Servicio extends JPanel {
 	private JButton vacio;
 	private JLabel vacio2;
 	private JButton aceptar;
 	private JButton volver;
-	private JTextField nombreT;
-	private JLabel nombreL;
-	private JTextField pesoT;
-	private JLabel pesoL;
-	private JTextField anno_NacimientoT;
-	private JLabel anno_NacimientoL;
-	private JTextField sexoT;
-	private JLabel sexoL;
-	private JTextField colorT;
-	private JLabel colorL;
-	private JTextField razaT;
-	private JLabel razaL;
-	private JTextField especieT;
-	private JLabel especieL;
-	private JComboBox<String> sexo;
+	private JDateChooser fechaD;
+	private JLabel fechaL;
+	private JTextField forma_pagoT;
+	private JLabel forma_pagoL;
+	private JTextField descripcionT;
+	private JLabel descripcionL;
+	private JLabel servicioL;
+	private JComboBox<String> servicioC;
 
 	
 	public PanelRegistro_Servicio() {
 
-		setLayout(new GridLayout(10, 2,0,0));
+		setLayout(new GridLayout(6, 2,0,0));
 
 		vacio = new JButton("VACIO");
 		vacio.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
 		
-		sexo = new JComboBox<String>();
-		sexo.addItem("Seleccione....");
-		sexo.addItem("F");
-		sexo.addItem("M");
-		sexo.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-		sexo.setEnabled(true);
+		servicioC = new JComboBox<String>();
+		servicioC.addItem("Seleccione....");
+		servicioC.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+		servicioC.setEnabled(true);
 
 		vacio.setVisible(false);
-		vacio2 = new JLabel("Registro Mascota   ");
+		vacio2 = new JLabel("Solicitud servicio   ");
 		vacio2.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
 //		vacio2.setForeground(Color.black);
 		vacio2.setVisible(true);
 
-		nombreL = new JLabel("Nombre: ");
-		nombreL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+		fechaL = new JLabel("Fecha: ");
+		fechaL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		nombresL.setForeground(Color.white);
-		nombreL.setEnabled(true);
+		fechaL.setEnabled(true);
 
-		nombreT = new JTextField();
-		nombreT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		nombreT.setEnabled(true);
+		fechaD = new JDateChooser();
+		fechaD.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		fechaD.setEnabled(true);
 
-		pesoL = new JLabel("Peso: ");
-		pesoL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+		forma_pagoL = new JLabel("Forma de pago: ");
+		forma_pagoL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		apellidosL.setForeground(Color.black);
-		pesoL.setEnabled(true);
+		forma_pagoL.setEnabled(true);
 
-		pesoT = new JTextField();
-		pesoT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		pesoT.setEnabled(true);
+		forma_pagoT = new JTextField();
+		forma_pagoT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		forma_pagoT.setEnabled(true);
 
-		anno_NacimientoL = new JLabel("Año Nacimiento: ");
-		anno_NacimientoL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+		servicioL = new JLabel("Servicio: ");
+		servicioL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		direccionL.setForeground(Color.white);
-		anno_NacimientoL.setEnabled(true);
-
-		anno_NacimientoT = new JTextField();
-		anno_NacimientoT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		anno_NacimientoT.setEnabled(true);
-
-		sexoL = new JLabel("Sexo: ");
-		sexoL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-//		correoL.setForeground(Color.black);
-		sexoL.setEnabled(true);
-
-		sexoT = new JTextField();
-		sexoT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		sexoT.setEnabled(true);
-
-		colorL = new JLabel("Color: ");
-		colorL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-//		documentoL.setForeground(Color.white);
-		colorL.setEnabled(true);
-
-		colorT = new JTextField();
-		colorT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		colorT.setEnabled(true);
-
-		razaL = new JLabel("Raza: ");
-		razaL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-//		telefonosL.setForeground(Color.black);
-		razaL.setEnabled(true);
-
-		razaT = new JTextField();
-		razaT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		razaT.setEnabled(true);
+		servicioL.setEnabled(true);
 		
-		especieL = new JLabel("Especie: ");
-		especieL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
-//		telefonosL.setForeground(Color.black);
-		especieL.setEnabled(true);
-		
-		especieT = new JTextField();
-		especieT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		especieT.setEnabled(true);
-		
+		descripcionT = new JTextField();
+		descripcionT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		descripcionT.setEnabled(true);
+
+		descripcionL = new JLabel("Descripcion: ");
+		descripcionL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+//		direccionL.setForeground(Color.white);
+		descripcionL.setEnabled(true);
 	
 		
 		volver = new JButton("Volver");
@@ -129,34 +93,18 @@ public class PanelRegistro_Servicio extends JPanel {
 //		add(vacio);
 		add(vacio2);
 		add(vacio);
-		add(nombreL);
-		add(nombreT);
-		add(pesoL);
-		add(pesoT);
-		add(anno_NacimientoL);
-		add(anno_NacimientoT);
-		add(sexoL);
-		add(sexo);
-		add(colorL);
-		add(colorT);
-		add(razaL);
-		add(razaT);
-		add(especieL);
-		add(especieT);
+		add(fechaL);
+		add(fechaD);
+		add(servicioL);
+		add(servicioC);
+		add(forma_pagoL);
+		add(forma_pagoT);
+		add(descripcionL);
+		add(descripcionT);
 	
 		add(aceptar);
 
 
-	}
-
-
-	public JComboBox<String> getSexo() {
-		return sexo;
-	}
-
-
-	public void setSexo(JComboBox<String> sexo) {
-		this.sexo = sexo;
 	}
 
 
@@ -200,148 +148,87 @@ public class PanelRegistro_Servicio extends JPanel {
 	}
 
 
-	public JTextField getNombreT() {
-		return nombreT;
+
+
+
+	public JDateChooser getFechaD() {
+		return fechaD;
 	}
 
 
-	public void setNombreT(JTextField nombreT) {
-		this.nombreT = nombreT;
+	public void setFechaD(JDateChooser fechaD) {
+		this.fechaD = fechaD;
 	}
 
 
-	public JLabel getNombreL() {
-		return nombreL;
+	public JLabel getFechaL() {
+		return fechaL;
 	}
 
 
-	public void setNombreL(JLabel nombreL) {
-		this.nombreL = nombreL;
+	public void setFechaL(JLabel fechaL) {
+		this.fechaL = fechaL;
 	}
 
 
-	public JTextField getPesoT() {
-		return pesoT;
+	public JTextField getForma_pagoT() {
+		return forma_pagoT;
 	}
 
 
-	public void setPesoT(JTextField pesoT) {
-		this.pesoT = pesoT;
+	public void setForma_pagoT(JTextField forma_pagoT) {
+		this.forma_pagoT = forma_pagoT;
 	}
 
 
-	public JLabel getPesoL() {
-		return pesoL;
+	public JLabel getForma_pagoL() {
+		return forma_pagoL;
 	}
 
 
-	public void setPesoL(JLabel pesoL) {
-		this.pesoL = pesoL;
+	public void setForma_pagoL(JLabel forma_pagoL) {
+		this.forma_pagoL = forma_pagoL;
 	}
 
 
-	public JTextField getAnno_NacimientoT() {
-		return anno_NacimientoT;
+	public JTextField getDescripcionT() {
+		return descripcionT;
 	}
 
 
-	public void setAnno_NacimientoT(JTextField anno_NacimientoT) {
-		this.anno_NacimientoT = anno_NacimientoT;
+	public void setDescripcionT(JTextField descripcionT) {
+		this.descripcionT = descripcionT;
 	}
 
 
-	public JLabel getAnno_NacimientoL() {
-		return anno_NacimientoL;
+	public JLabel getDescripcionL() {
+		return descripcionL;
 	}
 
 
-	public void setAnno_NacimientoL(JLabel anno_NacimientoL) {
-		this.anno_NacimientoL = anno_NacimientoL;
+	public void setDescripcionL(JLabel descripcionL) {
+		this.descripcionL = descripcionL;
 	}
 
 
-	public JTextField getSexoT() {
-		return sexoT;
+	public JLabel getServicioL() {
+		return servicioL;
 	}
 
 
-	public void setSexoT(JTextField sexoT) {
-		this.sexoT = sexoT;
+	public void setServicioL(JLabel servicioL) {
+		this.servicioL = servicioL;
 	}
 
 
-	public JLabel getSexoL() {
-		return sexoL;
+	public JComboBox<String> getServicioC() {
+		return servicioC;
 	}
 
 
-	public void setSexoL(JLabel sexoL) {
-		this.sexoL = sexoL;
+	public void setServicioC(JComboBox<String> servicioC) {
+		this.servicioC = servicioC;
 	}
-
-
-	public JTextField getColorT() {
-		return colorT;
-	}
-
-
-	public void setColorT(JTextField colorT) {
-		this.colorT = colorT;
-	}
-
-
-	public JLabel getColorL() {
-		return colorL;
-	}
-
-
-	public void setColorL(JLabel colorL) {
-		this.colorL = colorL;
-	}
-
-
-	public JTextField getRazaT() {
-		return razaT;
-	}
-
-
-	public void setRazaT(JTextField razaT) {
-		this.razaT = razaT;
-	}
-
-
-	public JLabel getRazaL() {
-		return razaL;
-	}
-
-
-	public void setRazaL(JLabel razaL) {
-		this.razaL = razaL;
-	}
-
-
-	public JTextField getEspecieT() {
-		return especieT;
-	}
-
-
-	public void setEspecieT(JTextField especieT) {
-		this.especieT = especieT;
-	}
-
-
-	public JLabel getEspecieL() {
-		return especieL;
-	}
-
-
-	public void setEspecieL(JLabel especieL) {
-		this.especieL = especieL;
-	}
-	
-
-	
-
 
 
 }

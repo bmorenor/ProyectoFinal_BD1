@@ -10,7 +10,7 @@ public class PanelMenu_Usuario extends JPanel {
 	private JButton verMascota;
 	private JButton añadirMascota;
 	private JButton eliminarMascota;
-	private JButton actualizarMascota;
+	private JButton facturas;
 	private JButton historialServicio;
 	private JButton solicitudServicio;
 	private JButton cerrarSesion;
@@ -20,7 +20,7 @@ public class PanelMenu_Usuario extends JPanel {
 
 	public PanelMenu_Usuario() {
 
-		setLayout(new GridLayout(7, 1, 10, 10));
+		setLayout(new GridLayout(8, 1, 10, 10));
 		
 		vacio = new JButton("VACIO");
 		vacio.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
@@ -40,9 +40,9 @@ public class PanelMenu_Usuario extends JPanel {
 		eliminarMascota.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		eliminarMascota.setEnabled(true);
 		
-		actualizarMascota = new JButton("Actualizar mascota");
-		actualizarMascota.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		actualizarMascota.setEnabled(true);
+		facturas = new JButton("Facturas");
+		facturas.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		facturas.setEnabled(true);
 		
 		historialServicio = new JButton("Historial Servicios");
 		historialServicio.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
@@ -69,11 +69,24 @@ public class PanelMenu_Usuario extends JPanel {
 		add(añadirMascota);
 //		add(eliminarMascota);
 //		add(actualizarMascota);
-		add(historialServicio);
 		add(solicitudServicio);
+		add(historialServicio);
+		add(facturas);
 		add(cerrarSesion);
 		add(salir);
 
+	}
+
+
+
+	public JButton getFacturas() {
+		return facturas;
+	}
+
+
+
+	public void setFacturas(JButton facturas) {
+		this.facturas = facturas;
 	}
 
 
@@ -124,17 +137,6 @@ public class PanelMenu_Usuario extends JPanel {
 		this.eliminarMascota = eliminarMascota;
 	}
 
-
-
-	public JButton getActualizarMascota() {
-		return actualizarMascota;
-	}
-
-
-
-	public void setActualizarMascota(JButton actualizarMascota) {
-		this.actualizarMascota = actualizarMascota;
-	}
 
 
 

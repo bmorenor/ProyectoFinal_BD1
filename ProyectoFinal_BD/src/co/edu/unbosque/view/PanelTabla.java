@@ -55,7 +55,7 @@ public class PanelTabla extends JPanel {
 
 		pdf.setEnabled(true);
 		
-		add(excel);
+//		add(excel);
 		add(pdf);
 		add(jScrollPane1);
 

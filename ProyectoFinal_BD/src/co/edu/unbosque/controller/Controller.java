@@ -2,13 +2,17 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import javax.swing.table.DefaultTableModel;
 
 import co.edu.unbosque.model.Usuario;
+import co.edu.unbosque.model.file.Pdf;
 import co.edu.unbosque.model.Cliente_Telefono;
 import co.edu.unbosque.model.Mascota;
 import co.edu.unbosque.model.Mascota_Color;
@@ -40,7 +44,9 @@ public class Controller implements ActionListener {
 	public Mascota_Raza raza;
 	public Mascota_especie especie;
 	public DefaultTableModel dftable;
+	public Pdf pdf;
 	public static boolean a = true;
+	public static String nombreArchivo="";
 
 	public Controller() throws ParseException {
 		vistaP = new VistaPrincipal();
@@ -77,6 +83,9 @@ public class Controller implements ActionListener {
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getHistorialServicio().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getAñadirMascota().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getSolicitudServicio().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Usuario().getFacturas().addActionListener(escuchador);
+		//PDF
+		vistaP.getPanelEstandar().getPanelTabla().getPdf().addActionListener(escuchador);
 		// Usuario -mascota
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAceptar().addActionListener(escuchador);
 		// Usuario -servicio
@@ -169,6 +178,32 @@ public class Controller implements ActionListener {
 
 
 		}
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getFacturas()) {
+
+			vistaP.mostrarMensaje("Hasta Pronto");
+			vistaP.getPanelEstandar().getPanelMenu_Usuario().setVisible(false);
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
+			vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
+
+
+		}
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getSolicitudServicio()) {
+
+		
+			
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
+			vistaP.getPanelEstandar().getPanelRegistro_Servicio().setVisible(true);
+
+
+		}
+		//SERVICIO GUARDADO
+	if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Servicio().getAceptar()) {
+		
+		SimpleDateFormat dformat = new SimpleDateFormat("dd-MM-YYYY");
+		String fecha = dformat.format(vistaP.getPanelEstandar().getPanelRegistro_Servicio().getFechaD());
+
+
+		}
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getAñadirMascota()) {
 			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(true);
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
@@ -219,7 +254,7 @@ public class Controller implements ActionListener {
 					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
 
 			ArrayList<Mascota> miMascota = mascotaDAO.listaMascotasUsuario();
-
+			int id_usuario = 0;
 			for (int i = 0; i < miMascota.size(); i++) {
 				dftable = (DefaultTableModel) vistaP.getPanelEstandar().getPanelTabla().getTabla().getModel();
 				String nombre = miMascota.get(i).getNombre();
@@ -232,9 +267,17 @@ public class Controller implements ActionListener {
 				String anno_naciemiento = miMascota.get(i).getAnno_nacimiento();
 				Object[] obj = { id, nombre, peso, color, raza, especie, anno_naciemiento,usuario};
 				dftable.addRow(obj);
+				id_usuario = usuario;
 			}
-
+			nombreArchivo = "MascotaCliente "+id_usuario+"";
 		
+		}
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getSalir()) {
+
+			vistaP.mostrarMensaje("Hasta Pronto");
+			salir();
+
+
 		}
 		// REGISTRAR CLIENTE
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelCliente_NuevoR().getAceptar()) {
@@ -381,7 +424,7 @@ public class Controller implements ActionListener {
 				Object[] obj = { id, nombres, apellidos, direccion, documento, correo, usuario };
 				dftable.addRow(obj);
 			}
-
+			nombreArchivo="TodosLosClientes";
 		}
 		if(botonPulsado== vistaP.getPanelEstandar().getPanelMenu_Admin().getMascota()) {
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
@@ -409,6 +452,19 @@ public class Controller implements ActionListener {
 				Object[] obj = { id, nombre, peso, color, raza, especie, anno_naciemiento,usuario};
 				dftable.addRow(obj);
 			}
+			nombreArchivo="TodasLasMascotas";
+		}
+		
+		//PDF
+		
+		if(botonPulsado== vistaP.getPanelEstandar().getPanelTabla().getPdf()) {
+			vistaP.getPanelEstandar().getPanelTabla().setVisible(true);
+			
+
+	
+			pdf = new Pdf();
+			pdf.utilJTableToPdf(vistaP.getPanelEstandar().getPanelTabla().getTabla(), nombreArchivo);
+	
 		}
 
 	}
