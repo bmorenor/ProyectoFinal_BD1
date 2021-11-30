@@ -44,6 +44,7 @@ public class HistoriaDAO {
 			int id_servicio = buscarServicio(factura_Detalle.getServicio());
 
 			int totalPago = totalPago(factura_Detalle.getIva(), tarifa(id_servicio), dezscuento(id_servicio));
+			System.out.println(totalPago+" "+tarifa(id_servicio)+" "+dezscuento(id_servicio)+" "+factura_Detalle.getIva());
 
 			bd.connectDatabase();
 			statement = bd.getConnection().createStatement();
@@ -191,12 +192,14 @@ public class HistoriaDAO {
 
 	public int totalPago(int iva, int tarifaS, int descuento) {
 		int ultimoR = 0;
+		float ivaD = (float) 0.0;
 
-		iva = iva / 100;
+		ivaD =(float)  iva / 100;
 
-		int totalIva = (iva * tarifaS) + tarifaS;
+		float totalIva = (ivaD * tarifaS);
 
-		ultimoR = totalIva - descuento;
+		ultimoR = (int) (tarifaS+totalIva)-descuento ;
+		System.out.println(totalIva);
 
 		return ultimoR;
 	}
@@ -317,7 +320,7 @@ public class HistoriaDAO {
 
 		try {
 			PreparedStatement consulta = bd.getConnection().prepareStatement(
-					"select e.id_factura , b.nombre , d.iva , e.fecha ,c.nombre_servicio,c.descuento ,d.total ,b.id_usuario from historia a, mascota b, servicio c, factura_detalle d, factura e\r\n"
+					"select e.id_factura , b.nombre , d.iva , e.fecha ,c.nombre_servicio,c.descuento, c.tarifa_servicio ,d.total ,b.id_usuario from historia a, mascota b, servicio c, factura_detalle d, factura e\r\n"
 					+ "where d.id_factura = e.id_factura \r\n"
 					+ "and a.id_factura_detalle = d.id_factura_detalle \r\n"
 					+ "and a.id_mascota = b.id_mascota \r\n"
@@ -331,7 +334,7 @@ public class HistoriaDAO {
 				factura.setMascota(res.getString("nombre"));
 				factura.setIva(res.getInt("iva"));
 				factura.setFecha(res.getString("fecha"));
-			
+				factura.setTarifa(res.getInt("tarifa_servicio"));
 				factura.setServicio(res.getString("nombre_servicio"));
 				factura.setDescuento(res.getInt("descuento"));
 				factura.setTotal(res.getInt("total"));
@@ -358,7 +361,7 @@ public class HistoriaDAO {
 
 		try {
 			PreparedStatement consulta = bd.getConnection().prepareStatement(
-					"select e.id_factura , b.nombre , d.iva , e.fecha ,c.nombre_servicio,c.descuento ,d.total  from historia a, mascota b, servicio c, factura_detalle d, factura e\r\n"
+					"select e.id_factura , b.nombre , d.iva , e.fecha ,c.nombre_servicio,c.descuento, c.tarifa_servicio ,d.total  from historia a, mascota b, servicio c, factura_detalle d, factura e\r\n"
 					+ "where b.id_usuario = "+id_usuario+"\r\n"
 					+ "and d.id_factura = e.id_factura \r\n"
 					+ "and a.id_factura_detalle = d.id_factura_detalle \r\n"
@@ -373,7 +376,7 @@ public class HistoriaDAO {
 				factura.setMascota(res.getString("nombre"));
 				factura.setIva(res.getInt("iva"));
 				factura.setFecha(res.getString("fecha"));
-			
+				factura.setTarifa(res.getInt("tarifa_servicio"));
 				factura.setServicio(res.getString("nombre_servicio"));
 				factura.setDescuento(res.getInt("descuento"));
 				factura.setTotal(res.getInt("total"));

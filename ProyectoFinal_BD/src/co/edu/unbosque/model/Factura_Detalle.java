@@ -12,6 +12,7 @@ public class Factura_Detalle {
 	private String nombreUsuario;
 	private int descuento;
 	private int id_usuario;
+	private int tarifa;
 	
 	
 	
@@ -93,6 +94,12 @@ public class Factura_Detalle {
 	}
 	public void setTotal(int total) {
 		this.total = total;
+	}
+	public int getTarifa() {
+		return tarifa;
+	}
+	public void setTarifa(int tarifa) {
+		this.tarifa = tarifa;
 	}
 	
 	

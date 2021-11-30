@@ -340,7 +340,7 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelTabla().getTabla()
 					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-					}, new String[] { "ID_factura","Fecha", "Mascota", "Servicio", "Descuento","Iva%", "Total"}));
+					}, new String[] { "ID_factura","Fecha", "Mascota", "Servicio", "Descuento","Iva%","Tarifa", "Total"}));
 			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
 					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
 
@@ -355,8 +355,9 @@ public class Controller implements ActionListener {
 				int iva =  miFactura.get(i).getIva();
 				int total = miFactura.get(i).getTotal();
 				int descuento = miFactura.get(i).getDescuento();
+				int tarifa = miFactura.get(i).getTarifa();
 	
-				Object[] obj = { id_factura, fecha, mascota, servicio, descuento, iva,total};
+				Object[] obj = { id_factura, fecha, mascota, servicio, descuento, iva,tarifa,total};
 				dftable.addRow(obj);
 			}
 			nombreArchivo = "Factura_"+id_factura+"Usuario_"+UsuarioDAO.id;
@@ -576,7 +577,7 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelTabla().getTabla()
 					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-					}, new String[] { "ID_factura","ID_usuario","Fecha", "Mascota", "Servicio", "Descuento","Iva%", "Total"}));
+					}, new String[] { "ID_factura","ID_usuario","Fecha", "Mascota", "Servicio", "Descuento","Iva%","Tarifa", "Total"}));
 			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
 					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
 
@@ -591,9 +592,10 @@ public class Controller implements ActionListener {
 				int iva =  miFactura.get(i).getIva();
 				int total = miFactura.get(i).getTotal();
 				int descuento = miFactura.get(i).getDescuento();
+				int tarifa = miFactura.get(i).getTarifa();
 				int id_usuario = miFactura.get(i).getId_usuario();
 	
-				Object[] obj = { id_factura,id_usuario, fecha, mascota, servicio, descuento, iva,total};
+				Object[] obj = { id_factura,id_usuario, fecha, mascota, servicio, descuento, iva,tarifa,total};
 				dftable.addRow(obj);
 			}
 			nombreArchivo = "Factura_Usuarios";
