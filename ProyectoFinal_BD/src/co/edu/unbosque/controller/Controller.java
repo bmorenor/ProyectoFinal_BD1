@@ -243,14 +243,14 @@ public class Controller implements ActionListener {
 		// A�ADIR MASCOTA
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAceptar()) {
 			if (verificarRegistroMascota()) {
-				String nombre = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().getText();
+				String nombre = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().getText().toUpperCase();
 				String anno_nacimiento = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAnno_NacimientoT()
 						.getText();
 				String peso = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getPesoT().getText();
-				String color1 = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getColorT().getText();
+				String color1 = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getColorT().getText().toUpperCase();
 				String sexo = (String) vistaP.getPanelEstandar().getPanelRegistro_Mascota().getSexo().getSelectedItem();
-				String raza1 = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getRazaT().getText();
-				String especie1 = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getEspecieT().getText();
+				String raza1 = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getRazaT().getText().toUpperCase();
+				String especie1 = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getEspecieT().getText().toUpperCase();
 				String estado = "A";
 
 				mascota = new Mascota(nombre, color1, especie1, anno_nacimiento, raza1, peso, estado, sexo);
@@ -371,9 +371,9 @@ public class Controller implements ActionListener {
 		// REGISTRAR CLIENTE
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelCliente_NuevoR().getAceptar()) {
 
-			String nombres = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getNombresT().getText();
-			String apellidos = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getApellidosT().getText();
-			String direccion = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDireccionT().getText();
+			String nombres = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getNombresT().getText().toUpperCase();
+			String apellidos = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getApellidosT().getText().toUpperCase();
+			String direccion = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDireccionT().getText().toUpperCase();
 			String correo = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getCorreoT().getText();
 			String documento = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDocumentoT().getText();
 			String telefono = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getTelefonosT().getText();
