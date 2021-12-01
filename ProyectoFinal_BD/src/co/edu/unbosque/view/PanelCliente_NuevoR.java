@@ -111,7 +111,7 @@ public class PanelCliente_NuevoR extends JPanel {
 		usuarioT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		usuarioT.setEnabled(true);
 		
-		contrasena1L = new JLabel("Contrase�a: ");
+		contrasena1L = new JLabel("Contrasena: ");
 		contrasena1L.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		telefonosL.setForeground(Color.black);
 		contrasena1L.setEnabled(true);
