@@ -71,7 +71,7 @@ public class PanelRegistro_Mascota extends JPanel {
 		pesoT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		pesoT.setEnabled(true);
 
-		anno_NacimientoL = new JLabel("Año Nacimiento: ");
+		anno_NacimientoL = new JLabel("Anno Nacimiento: ");
 		anno_NacimientoL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		direccionL.setForeground(Color.white);
 		anno_NacimientoL.setEnabled(true);

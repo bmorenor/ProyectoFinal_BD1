@@ -38,7 +38,7 @@ public class PanelRegistro_Usuario extends JPanel {
 		usuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		usuario.setEnabled(true);
 		
-		contrasenia = new JLabel("Contrase�a: ");
+		contrasenia = new JLabel("Contrasena: ");
 		contrasenia.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		contrasenia.setEnabled(true);
 		
@@ -56,7 +56,7 @@ public class PanelRegistro_Usuario extends JPanel {
 		aceptar.setActionCommand("ACEPTAR_REGISTRO_USUARIO");
 		aceptar.setEnabled(true);
 
-		verContrasena = new JButton("Ver/ocultar contrase�a");
+		verContrasena = new JButton("Ver/ocultar contrasena");
 		verContrasena.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		verContrasena.setActionCommand("VER_CONTRASE�A_REGISTRO_USUARIO");
 		

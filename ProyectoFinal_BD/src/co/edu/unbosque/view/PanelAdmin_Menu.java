@@ -23,7 +23,7 @@ public class PanelAdmin_Menu extends JPanel {
 
 		vacio.setVisible(false);
 
-		cuenta = new JButton("Iniciar Sesión");
+		cuenta = new JButton("Iniciar Sesion");
 		cuenta.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 
 		cuenta.setEnabled(true);

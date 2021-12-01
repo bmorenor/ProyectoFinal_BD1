@@ -31,7 +31,7 @@ public class PanelMenu_Usuario extends JPanel {
 		verMascota.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		verMascota.setEnabled(true);
 
-		anadirMascota = new JButton("A�adir mascota");
+		anadirMascota = new JButton("Anadir mascota");
 		anadirMascota.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		anadirMascota.setEnabled(true);
 		

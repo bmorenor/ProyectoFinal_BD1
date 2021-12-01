@@ -66,7 +66,7 @@ public class PanelCliente_NuevoR extends JPanel {
 		apellidosT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		apellidosT.setEnabled(true);
 
-		direccionL = new JLabel("Direcci�n: ");
+		direccionL = new JLabel("Direccion: ");
 		direccionL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		direccionL.setForeground(Color.white);
 		direccionL.setEnabled(true);
@@ -120,7 +120,7 @@ public class PanelCliente_NuevoR extends JPanel {
 		contrasena1T.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		contrasena1T.setEnabled(true);
 		
-		contrasena2L = new JLabel("Confirme contrase�a: ");
+		contrasena2L = new JLabel("Confirme contrasena: ");
 		contrasena2L.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		telefonosL.setForeground(Color.black);
 		contrasena2L.setEnabled(true);
@@ -129,7 +129,7 @@ public class PanelCliente_NuevoR extends JPanel {
 		contrasena2T.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		contrasena2T.setEnabled(true);
 
-		verContrasena = new JButton("Ver/ocultar contrase�a");
+		verContrasena = new JButton("Ver/ocultar contrasena");
 		verContrasena.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 	
 		
