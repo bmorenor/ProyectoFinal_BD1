@@ -242,7 +242,7 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelRegistro_Servicio().setVisible(false);
 
 		}
-		// A�ADIR MASCOTA
+		// ANNADIR MASCOTA
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAceptar()) {
 			if (verificarRegistroMascota()) {
 				String nombre = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().getText().toUpperCase();
@@ -282,7 +282,7 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelTabla().getTabla()
 					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "A�o Nacimiento",
+					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "Anno Nacimiento",
 							"Id_cliente" }));
 			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
 					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
@@ -560,7 +560,7 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelTabla().getTabla()
 					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "A�o Nacimiento",
+					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "Anno Nacimiento",
 							"Id_cliente" }));
 			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
 					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());

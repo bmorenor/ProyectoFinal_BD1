@@ -17,7 +17,6 @@ public class PanelEstandar extends JPanel {
 
 	private PanelMenu panelMenu;
 	private Image imagenPrincipal;
-	private PanelActualizar panelActualizar;
 	private PanelCliente_Menu panelCliente_Menu;
 	private PanelAdmin_Menu panelAdmin_Menu;
 	private PanelRegistro_Usuario panelRegistro_Usuario;
@@ -90,9 +89,6 @@ public class PanelEstandar extends JPanel {
 		panelAdmin_Menu.setVisible(false);
 		panelAdmin_Menu.setOpaque(false);
 
-		panelActualizar = new PanelActualizar();
-		panelActualizar.setVisible(false);
-		panelActualizar.setOpaque(false);
 
 		panelMenu_Admin = new PanelMenu_Admin();
 		panelMenu_Admin.setVisible(false);
@@ -107,12 +103,9 @@ public class PanelEstandar extends JPanel {
 		add(panelTabla);
 		add(panelCliente_NuevoR);
 		add(panelCliente_Menu);
-
 		add(panelRegistro_Usuario);
 		add(panelMenu_Usuario);
 		add(panelRegistro_Admin);
-		add(panelActualizar);
-
 		add(panelAdmin_Menu);
 		add(panelMenu_Admin);
 		add(panelRegistro_Mascota);
@@ -161,14 +154,6 @@ public class PanelEstandar extends JPanel {
 	}
 
 
-
-	public PanelActualizar getPanelActualizar() {
-		return panelActualizar;
-	}
-
-	public void setPanelActualizar(PanelActualizar panelActualizar) {
-		this.panelActualizar = panelActualizar;
-	}
 
 	public PanelCliente_Menu getPanelCliente_Menu() {
 		return panelCliente_Menu;
