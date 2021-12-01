@@ -3,23 +3,18 @@ package co.edu.unbosque.view;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class PanelRegistro_Admin extends JPanel {
 	private JButton vacio;
 	private JButton vacio2;
 	private JLabel cuenta;
-	private JLabel contraseña;
+	private JLabel contrasena;
 	private JButton aceptar;
 	private JButton volver;
 	private JTextField usuario;
 	private JPasswordField password;
-	private JButton verContraseña;
+	private JButton verContrasena;
 
 
 	public PanelRegistro_Admin() {
@@ -43,9 +38,9 @@ public class PanelRegistro_Admin extends JPanel {
 		usuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		usuario.setEnabled(true);
 		
-		contraseña = new JLabel("Contraseña: ");
-		contraseña.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		contraseña.setEnabled(true);
+		contrasena = new JLabel("Contraseï¿½a: ");
+		contrasena.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		contrasena.setEnabled(true);
 		
 		password = new JPasswordField();
 		password.setFont((new Font("Comic Sans MS", Font.PLAIN, 20)));
@@ -61,18 +56,18 @@ public class PanelRegistro_Admin extends JPanel {
 		aceptar.setActionCommand("ACEPTAR_REGISTRO_ADMIN");
 		aceptar.setEnabled(true);
 
-		verContraseña = new JButton("Ver/ocultar contraseña");
-		verContraseña.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		verContraseña.setActionCommand("VER_CONTRASEÑA_REGISTRO_ADMIN");
+		verContrasena = new JButton("Ver/ocultar contraseï¿½a");
+		verContrasena.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		verContrasena.setActionCommand("VER_CONTRASEï¿½A_REGISTRO_ADMIN");
 		
 
 		add(vacio);
 		add(vacio2);
 		add(cuenta);
 		add(usuario);
-		add(contraseña);
+		add(contrasena);
 		add(password);
-		add(verContraseña);
+		add(verContrasena);
 		add(aceptar);
 		add(volver);
 
@@ -89,15 +84,6 @@ public class PanelRegistro_Admin extends JPanel {
 		aceptar = borrar;
 	}
 
-
-
-	public JButton getSalir() {
-		return verContraseña;
-	}
-
-	public void setSalir(JButton salir) {
-		this.verContraseña = salir;
-	}
 
 
 	public JButton getVacio() {
@@ -143,18 +129,6 @@ public class PanelRegistro_Admin extends JPanel {
 
 
 
-	public JLabel getContraseña() {
-		return contraseña;
-	}
-
-
-
-	public void setContraseña(JLabel contraseña) {
-		this.contraseña = contraseña;
-	}
-
-
-
 	public JButton getAceptar() {
 		return aceptar;
 	}
@@ -190,17 +164,19 @@ public class PanelRegistro_Admin extends JPanel {
 	}
 
 
-
-	public JButton getVerContraseña() {
-		return verContraseña;
+	public JLabel getContrasena() {
+		return contrasena;
 	}
 
-
-
-	public void setVerContraseña(JButton verContraseña) {
-		this.verContraseña = verContraseña;
+	public void setContrasena(JLabel contrasena) {
+		this.contrasena = contrasena;
 	}
-	
-	
 
+	public JButton getVerContrasena() {
+		return verContrasena;
+	}
+
+	public void setVerContrasena(JButton verContrasena) {
+		this.verContrasena = verContrasena;
+	}
 }

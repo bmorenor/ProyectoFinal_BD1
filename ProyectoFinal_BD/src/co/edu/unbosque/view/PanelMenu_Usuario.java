@@ -1,14 +1,13 @@
 package co.edu.unbosque.view;
 import java.awt.Font;
 import java.awt.GridLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class PanelMenu_Usuario extends JPanel {
 	
 	private JButton vacio;
 	private JButton verMascota;
-	private JButton añadirMascota;
+	private JButton anadirMascota;
 	private JButton eliminarMascota;
 	private JButton facturas;
 	private JButton historialServicio;
@@ -32,9 +31,9 @@ public class PanelMenu_Usuario extends JPanel {
 		verMascota.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		verMascota.setEnabled(true);
 
-		añadirMascota = new JButton("Añadir mascota");
-		añadirMascota.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		añadirMascota.setEnabled(true);
+		anadirMascota = new JButton("Aï¿½adir mascota");
+		anadirMascota.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		anadirMascota.setEnabled(true);
 		
 		eliminarMascota = new JButton("Eliminar mascota");
 		eliminarMascota.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
@@ -66,7 +65,7 @@ public class PanelMenu_Usuario extends JPanel {
 		
 		add(verMascota);
 	
-		add(añadirMascota);
+		add(anadirMascota);
 //		add(eliminarMascota);
 //		add(actualizarMascota);
 		add(solicitudServicio);
@@ -114,18 +113,13 @@ public class PanelMenu_Usuario extends JPanel {
 	}
 
 
-
-	public JButton getAñadirMascota() {
-		return añadirMascota;
+	public JButton getAnadirMascota() {
+		return anadirMascota;
 	}
 
-
-
-	public void setAñadirMascota(JButton añadirMascota) {
-		this.añadirMascota = añadirMascota;
+	public void setAnadirMascota(JButton anadirMascota) {
+		this.anadirMascota = anadirMascota;
 	}
-
-
 
 	public JButton getEliminarMascota() {
 		return eliminarMascota;
@@ -188,6 +182,4 @@ public class PanelMenu_Usuario extends JPanel {
 
 
 
-
-	
 }

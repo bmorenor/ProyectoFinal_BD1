@@ -82,18 +82,18 @@ public class Controller implements ActionListener {
 		vistaP.getPanelEstandar().getPanelCliente_Menu().getSalir().addActionListener(escuchador);
 		// SESION USUARIO
 		vistaP.getPanelEstandar().getPanelRegistro_Usuario().getVolver().addActionListener(escuchador);
-		vistaP.getPanelEstandar().getPanelRegistro_Usuario().getVerContraseña().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelRegistro_Usuario().getVerContrasena().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelRegistro_Usuario().getAceptar().addActionListener(escuchador);
 		// REGISTRO USUARIO
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getAceptar().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getVolver().addActionListener(escuchador);
-		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getVerContraseña().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getVerContrasena().addActionListener(escuchador);
 		// SESION USUARIO-MASCOTAS
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getCerrarSesion().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getSalir().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getVerMascota().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getHistorialServicio().addActionListener(escuchador);
-		vistaP.getPanelEstandar().getPanelMenu_Usuario().getAñadirMascota().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelMenu_Usuario().getAnadirMascota().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getSolicitudServicio().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Usuario().getFacturas().addActionListener(escuchador);
 		// PDF
@@ -108,7 +108,7 @@ public class Controller implements ActionListener {
 		// SESION ADMIN
 		vistaP.getPanelEstandar().getPanelRegistro_Admin().getAceptar().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelRegistro_Admin().getVolver().addActionListener(escuchador);
-		vistaP.getPanelEstandar().getPanelRegistro_Admin().getVerContraseña().addActionListener(escuchador);
+		vistaP.getPanelEstandar().getPanelRegistro_Admin().getVerContrasena().addActionListener(escuchador);
 		// Menu de visualizacion ADMIN
 		vistaP.getPanelEstandar().getPanelMenu_Admin().getCliente().addActionListener(escuchador);
 		vistaP.getPanelEstandar().getPanelMenu_Admin().getMascota().addActionListener(escuchador);
@@ -172,7 +172,7 @@ public class Controller implements ActionListener {
 				vistaP.mostrarError("Verifique los campos");
 			}
 		}
-		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Usuario().getVerContraseña()) {
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Usuario().getVerContrasena()) {
 			if (a == true) {
 				vistaP.getPanelEstandar().getPanelRegistro_Usuario().getPassword().setEchoChar((char) 0);
 				a = false;
@@ -234,13 +234,13 @@ public class Controller implements ActionListener {
 			}
 
 		}
-		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getAñadirMascota()) {
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelMenu_Usuario().getAnadirMascota()) {
 			vistaP.getPanelEstandar().getPanelRegistro_Mascota().setVisible(true);
 			vistaP.getPanelEstandar().getPanelTabla().setVisible(false);
 			vistaP.getPanelEstandar().getPanelRegistro_Servicio().setVisible(false);
 
 		}
-		// AÑADIR MASCOTA
+		// Aï¿½ADIR MASCOTA
 		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Mascota().getAceptar()) {
 			if (verificarRegistroMascota()) {
 				String nombre = vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().getText();
@@ -280,7 +280,7 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelTabla().getTabla()
 					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "Año Nacimiento",
+					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "Aï¿½o Nacimiento",
 							"Id_cliente" }));
 			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
 					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
@@ -378,14 +378,14 @@ public class Controller implements ActionListener {
 			String documento = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDocumentoT().getText();
 			String telefono = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getTelefonosT().getText();
 			String usuario = vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().getText();
-			String contraseña1 = new String(
-					vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().getPassword());
-			String contraseña2 = new String(
-					vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().getPassword());
+			String contrasena1 = new String(
+					vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena1T().getPassword());
+			String contrasena2 = new String(
+					vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena2T().getPassword());
 			String estado = "A";
 			if (verificarRegistroCliente() == true) {
-				if (contraseña1.equals(contraseña2)) {
-					cliente = new Usuario(nombres, apellidos, direccion, correo, documento, usuario, contraseña2,
+				if (contrasena1.equals(contrasena2)) {
+					cliente = new Usuario(nombres, apellidos, direccion, correo, documento, usuario, contrasena2,
 							estado);
 					cliente_Telefono = new Cliente_Telefono(telefono, estado);
 					if (clienteDAO.verificarNumeros(cliente_Telefono) == true) {
@@ -402,11 +402,11 @@ public class Controller implements ActionListener {
 						}
 
 					} else {
-						vistaP.mostrarError("Algun número ya ha estado registrado anteriormente");
+						vistaP.mostrarError("Algun nï¿½mero ya ha estado registrado anteriormente");
 					}
 
 				} else {
-					vistaP.mostrarError("Las contraseñas no coinciden");
+					vistaP.mostrarError("Las contraseï¿½as no coinciden");
 				}
 			} else {
 				vistaP.mostrarError("Por favor verifique los campos");
@@ -418,16 +418,16 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelCliente_Menu().setVisible(true);
 			vistaP.getPanelEstandar().getPanelCliente_NuevoR().setVisible(false);
 		}
-		if (botonPulsado == vistaP.getPanelEstandar().getPanelCliente_NuevoR().getVerContraseña()) {
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelCliente_NuevoR().getVerContrasena()) {
 
 			if (a == true) {
-				vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().setEchoChar((char) 0);
-				vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().setEchoChar((char) 0);
+				vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena1T().setEchoChar((char) 0);
+				vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena2T().setEchoChar((char) 0);
 				a = false;
 			} else {
 				vistaP.getPanelEstandar().getPanelRegistro_Admin().getPassword().setEchoChar('•');
-				vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().setEchoChar('•');
-				vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().setEchoChar('•');
+				vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena1T().setEchoChar('•');
+				vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena2T().setEchoChar('•');
 				a = true;
 			}
 
@@ -477,7 +477,7 @@ public class Controller implements ActionListener {
 
 		}
 
-		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Admin().getVerContraseña()) {
+		if (botonPulsado == vistaP.getPanelEstandar().getPanelRegistro_Admin().getVerContrasena()) {
 			if (a == true) {
 				vistaP.getPanelEstandar().getPanelRegistro_Admin().getPassword().setEchoChar((char) 0);
 				a = false;
@@ -548,7 +548,7 @@ public class Controller implements ActionListener {
 			vistaP.getPanelEstandar().getPanelTabla().getTabla()
 					.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "Año Nacimiento",
+					}, new String[] { "ID", "Nombre", "Peso", "Color", "Raza", "Especie", "Aï¿½o Nacimiento",
 							"Id_cliente" }));
 			vistaP.getPanelEstandar().getPanelTabla().getjScrollPane1()
 					.setViewportView(vistaP.getPanelEstandar().getPanelTabla().getTabla());
@@ -627,8 +627,8 @@ public class Controller implements ActionListener {
 				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getDocumentoT().getText().equals("")
 				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getTelefonosT().getText().equals("")
 				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().getText().equals("")
-				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().getPassword().equals(null)
-				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().getPassword().equals(null)) {
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena1T().getPassword().equals(null)
+				&& !vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena2T().getPassword().equals(null)) {
 
 			registro = true;
 		} else {
@@ -689,8 +689,8 @@ public class Controller implements ActionListener {
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getTelefonosT().setText("");
 		;
 		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getUsuarioT().setText("");
-		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña1T().setText("");
-		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContraseña2T().setText("");
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena1T().setText("");
+		vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena2T().setText("");
 
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getNombreT().setText("");
 		vistaP.getPanelEstandar().getPanelRegistro_Mascota().getColorT().setText("");

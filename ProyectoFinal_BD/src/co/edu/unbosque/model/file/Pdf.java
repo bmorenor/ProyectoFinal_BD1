@@ -24,29 +24,29 @@ public class Pdf {
 	public void utilJTableToPdf(JTable jTable, String title){    
 	    try {
 	    	
-	    	archivo = new File("Files/"+title+".pdf");
+	    	archivo = new File(""+title+".pdf");
 	        // We create the document and set the file name.        
 	        // Creamos el documento e indicamos el nombre del fichero.
 	        Document document = new Document();
 	        try {
 	            PdfWriter.getInstance(document, new FileOutputStream(archivo));
 	        } catch (FileNotFoundException fileNotFoundException) {
-	            System.out.println("No such file was found to generate the PDF (No se encontró el fichero para generar el pdf)" + fileNotFoundException);
+	            System.out.println("No such file was found to generate the PDF (No se encontrï¿½ el fichero para generar el pdf)" + fileNotFoundException);
 	        }
 	        document.open();
 	        // We add metadata to PDF
-	        // Añadimos los metadatos del PDF
+	        // Aï¿½adimos los metadatos del PDF
 	        document.addTitle(title);
-	        document.addSubject("Información sobre "+title);
+	        document.addSubject("Informaciï¿½n sobre "+title);
 	        document.addKeywords("Java, PDF, iText");
 	        document.addAuthor("BmorenorR");
 	        document.addCreator("BMORENOR");
 	         
-	        // First page (Primera página)
+	        // First page (Primera pï¿½gina)
 	        Anchor anchor = new Anchor(title, categoryFont);
 	        anchor.setName(title);
 	 
-	        // Second parameter is the number of the chapter (El segundo parámetro es el número del capítulo).
+	        // Second parameter is the number of the chapter (El segundo parï¿½metro es el nï¿½mero del capï¿½tulo).
 	        Chapter catPart = new Chapter(new Paragraph(anchor), 1);
 	 
 	        Paragraph subPara = new Paragraph("", subCategoryFont);

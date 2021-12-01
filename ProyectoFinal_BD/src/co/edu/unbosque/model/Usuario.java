@@ -16,14 +16,14 @@ public class Usuario {
 
 	}
 	public Usuario(String nombres, String apellidos, String direccion, String correo, String documentoIdentidad,
-			String usuario, String contraseña, String estado) {
+			String usuario, String contrasenia, String estado) {
 		this.nombres = nombres;
 		this.apellidos = apellidos;
 		this.direccion = direccion;
 		this.correo = correo;
 		this.documentoIdentidad = documentoIdentidad;
 		this.usuario = usuario;
-		this.contrasenia = contraseña;
+		this.contrasenia = contrasenia;
 		this.estado = estado;
 	}
 

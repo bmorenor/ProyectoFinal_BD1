@@ -29,11 +29,11 @@ public class PanelCliente_NuevoR extends JPanel {
 	private JLabel telefonosL;
 	private JTextField usuarioT;
 	private JLabel usuarioL;
-	private JPasswordField contraseña1T;
-	private JLabel contraseña1L;
-	private JPasswordField contraseña2T;
-	private JLabel contraseña2L;
-	private JButton verContraseña;
+	private JPasswordField contrasena1T;
+	private JLabel contrasena1L;
+	private JPasswordField contrasena2T;
+	private JLabel contrasena2L;
+	private JButton verContrasena;
 	
 	public PanelCliente_NuevoR() {
 
@@ -66,7 +66,7 @@ public class PanelCliente_NuevoR extends JPanel {
 		apellidosT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		apellidosT.setEnabled(true);
 
-		direccionL = new JLabel("Dirección: ");
+		direccionL = new JLabel("Direcciï¿½n: ");
 		direccionL.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		direccionL.setForeground(Color.white);
 		direccionL.setEnabled(true);
@@ -111,26 +111,26 @@ public class PanelCliente_NuevoR extends JPanel {
 		usuarioT.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		usuarioT.setEnabled(true);
 		
-		contraseña1L = new JLabel("Contraseña: ");
-		contraseña1L.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+		contrasena1L = new JLabel("Contraseï¿½a: ");
+		contrasena1L.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		telefonosL.setForeground(Color.black);
-		contraseña1L.setEnabled(true);
+		contrasena1L.setEnabled(true);
 		
-		contraseña1T = new JPasswordField();
-		contraseña1T.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		contraseña1T.setEnabled(true);
+		contrasena1T = new JPasswordField();
+		contrasena1T.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		contrasena1T.setEnabled(true);
 		
-		contraseña2L = new JLabel("Confirme contraseña: ");
-		contraseña2L.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+		contrasena2L = new JLabel("Confirme contraseï¿½a: ");
+		contrasena2L.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
 //		telefonosL.setForeground(Color.black);
-		contraseña2L.setEnabled(true);
+		contrasena2L.setEnabled(true);
 		
-		contraseña2T = new JPasswordField();
-		contraseña2T.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		contraseña2T.setEnabled(true);
+		contrasena2T = new JPasswordField();
+		contrasena2T.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		contrasena2T.setEnabled(true);
 
-		verContraseña = new JButton("Ver/ocultar contraseña");
-		verContraseña.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		verContrasena = new JButton("Ver/ocultar contraseï¿½a");
+		verContrasena.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 	
 		
 		volver = new JButton("Volver");
@@ -158,65 +158,16 @@ public class PanelCliente_NuevoR extends JPanel {
 		add(telefonosT);
 		add(usuarioL);
 		add(usuarioT);
-		add(contraseña1L);
-		add(contraseña1T);
-		add(contraseña2L);
-		add(contraseña2T);
+		add(contrasena1L);
+		add(contrasena1T);
+		add(contrasena2L);
+		add(contrasena2T);
 		add(aceptar);
-		add(verContraseña);
+		add(verContrasena);
 		add(volver);
 
 	}
 	
-
-	public JPasswordField getContraseña1T() {
-		return contraseña1T;
-	}
-
-
-	public void setContraseña1T(JPasswordField contraseña1t) {
-		contraseña1T = contraseña1t;
-	}
-
-
-	public JLabel getContraseña1L() {
-		return contraseña1L;
-	}
-
-
-	public void setContraseña1L(JLabel contraseña1l) {
-		contraseña1L = contraseña1l;
-	}
-
-
-	public JPasswordField getContraseña2T() {
-		return contraseña2T;
-	}
-
-
-	public void setContraseña2T(JPasswordField contraseña2t) {
-		contraseña2T = contraseña2t;
-	}
-
-
-	public JLabel getContraseña2L() {
-		return contraseña2L;
-	}
-
-
-	public void setContraseña2L(JLabel contraseña2l) {
-		contraseña2L = contraseña2l;
-	}
-
-
-	public JButton getVerContraseña() {
-		return verContraseña;
-	}
-
-
-	public void setVerContraseña(JButton verContraseña) {
-		this.verContraseña = verContraseña;
-	}
 
 
 	public JButton getBorrar() {
@@ -373,34 +324,43 @@ public class PanelCliente_NuevoR extends JPanel {
 		this.usuarioL = usuarioL;
 	}
 
-	public JTextField getContrseña1T() {
-		return contraseña1T;
+	public JPasswordField getContrasena1T() {
+		return contrasena1T;
 	}
 
-
-
-	public JLabel getContrseña1L() {
-		return contraseña1L;
+	public void setContrasena1T(JPasswordField contrasena1T) {
+		this.contrasena1T = contrasena1T;
 	}
 
-	public void setContrseña1L(JLabel contrseña1l) {
-		contraseña1L = contrseña1l;
+	public JLabel getContrasena1L() {
+		return contrasena1L;
 	}
 
-	public JTextField getContrseña2T() {
-		return contraseña2T;
+	public void setContrasena1L(JLabel contrasena1L) {
+		this.contrasena1L = contrasena1L;
 	}
 
-
-
-	public JLabel getContrseña2L() {
-		return contraseña2L;
+	public JPasswordField getContrasena2T() {
+		return contrasena2T;
 	}
 
-	public void setContrseña2L(JLabel contrseña2l) {
-		contraseña2L = contrseña2l;
+	public void setContrasena2T(JPasswordField contrasena2T) {
+		this.contrasena2T = contrasena2T;
 	}
 
+	public JLabel getContrasena2L() {
+		return contrasena2L;
+	}
 
+	public void setContrasena2L(JLabel contrasena2L) {
+		this.contrasena2L = contrasena2L;
+	}
 
+	public JButton getVerContrasena() {
+		return verContrasena;
+	}
+
+	public void setVerContrasena(JButton verContrasena) {
+		this.verContrasena = verContrasena;
+	}
 }

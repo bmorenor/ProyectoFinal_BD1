@@ -3,12 +3,7 @@ package co.edu.unbosque.view;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class PanelRegistro_Usuario extends JPanel {
 	private JButton vacio;
@@ -19,7 +14,7 @@ public class PanelRegistro_Usuario extends JPanel {
 	private JButton volver;
 	private JTextField usuario;
 	private JPasswordField password;
-	private JButton verContraseña;
+	private JButton verContrasena;
 
 
 	public PanelRegistro_Usuario() {
@@ -43,7 +38,7 @@ public class PanelRegistro_Usuario extends JPanel {
 		usuario.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		usuario.setEnabled(true);
 		
-		contrasenia = new JLabel("Contraseña: ");
+		contrasenia = new JLabel("Contraseï¿½a: ");
 		contrasenia.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		contrasenia.setEnabled(true);
 		
@@ -61,9 +56,9 @@ public class PanelRegistro_Usuario extends JPanel {
 		aceptar.setActionCommand("ACEPTAR_REGISTRO_USUARIO");
 		aceptar.setEnabled(true);
 
-		verContraseña = new JButton("Ver/ocultar contraseña");
-		verContraseña.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		verContraseña.setActionCommand("VER_CONTRASEÑA_REGISTRO_USUARIO");
+		verContrasena = new JButton("Ver/ocultar contraseï¿½a");
+		verContrasena.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		verContrasena.setActionCommand("VER_CONTRASEï¿½A_REGISTRO_USUARIO");
 		
 
 		add(vacio);
@@ -72,7 +67,7 @@ public class PanelRegistro_Usuario extends JPanel {
 		add(usuario);
 		add(contrasenia);
 		add(password);
-		add(verContraseña);
+		add(verContrasena);
 		add(aceptar);
 		add(volver);
 
@@ -89,15 +84,6 @@ public class PanelRegistro_Usuario extends JPanel {
 		aceptar = borrar;
 	}
 
-
-
-	public JButton getSalir() {
-		return verContraseña;
-	}
-
-	public void setSalir(JButton salir) {
-		this.verContraseña = salir;
-	}
 
 
 	public JButton getVacio() {
@@ -194,17 +180,11 @@ public class PanelRegistro_Usuario extends JPanel {
 	}
 
 
-
-	public JButton getVerContraseña() {
-		return verContraseña;
+	public JButton getVerContrasena() {
+		return verContrasena;
 	}
 
-
-
-	public void setVerContraseña(JButton verContraseña) {
-		this.verContraseña = verContraseña;
+	public void setVerContrasena(JButton verContrasena) {
+		this.verContrasena = verContrasena;
 	}
-	
-	
-
 }

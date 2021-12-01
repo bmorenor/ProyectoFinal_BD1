@@ -8,7 +8,7 @@ public class PostgresBD {
 	String host = "192.168.10.15";
 	String usuario = "postgres";
 	String url = "jdbc:postgresql://192.168.10.15/TrabajoFinal";
-	String contraseña = "12345";
+	String contrasena = "12345";
 	
     private Connection connection = null;
 	 public void connectDatabase() {
@@ -24,7 +24,7 @@ public class PostgresBD {
 	            // Database connect
 	            // Conectamos con la base de datos
 	            connection = DriverManager.getConnection(
-	                    url,usuario, contraseña);
+	                    url,usuario, contrasena);
 	            if (connection != null) {
 	                System.out.println("Connection OK");
 	            } else {
@@ -43,42 +43,52 @@ public class PostgresBD {
 		     System.out.println(sqle);
 		    }
 		}
+
 	public String getBd() {
 		return bd;
 	}
+
 	public void setBd(String bd) {
 		this.bd = bd;
 	}
+
 	public String getHost() {
 		return host;
 	}
+
 	public void setHost(String host) {
 		this.host = host;
 	}
+
 	public String getUsuario() {
 		return usuario;
 	}
+
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
+
 	public String getUrl() {
 		return url;
 	}
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getContraseña() {
-		return contraseña;
+
+	public String getContrasena() {
+		return contrasena;
 	}
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
+
 	public Connection getConnection() {
 		return connection;
 	}
+
 	public void setConnection(Connection connection) {
 		this.connection = connection;
-	} 
-	 
-	 
+	}
 }
