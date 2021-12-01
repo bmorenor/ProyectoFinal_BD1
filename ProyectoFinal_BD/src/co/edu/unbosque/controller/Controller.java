@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -384,6 +386,10 @@ public class Controller implements ActionListener {
 					vistaP.getPanelEstandar().getPanelCliente_NuevoR().getContrasena2T().getPassword());
 			String estado = "A";
 			if (verificarRegistroCliente() == true) {
+				if(isNumeric(telefono) && isNumeric(documento)) {
+					if(ValidarMail(correo)==true) {
+						
+				
 				if (contrasena1.equals(contrasena2)) {
 					cliente = new Usuario(nombres, apellidos, direccion, correo, documento, usuario, contrasena2,
 							estado);
@@ -402,11 +408,17 @@ public class Controller implements ActionListener {
 						}
 
 					} else {
-						vistaP.mostrarError("Algun n�mero ya ha estado registrado anteriormente");
+						vistaP.mostrarError("Algun numero ya ha estado registrado anteriormente");
 					}
 
 				} else {
-					vistaP.mostrarError("Las contrase�as no coinciden");
+					vistaP.mostrarError("Las contrasenas no coinciden");
+				}
+					}else {
+						vistaP.mostrarError("Por favor escriba un correo valido");
+					}
+				}else {
+					vistaP.mostrarError("Por Favor ingrese datos validos");
 				}
 			} else {
 				vistaP.mostrarError("Por favor verifique los campos");
@@ -731,5 +743,21 @@ public class Controller implements ActionListener {
 
 		}
 	}
+	private static boolean isNumeric(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException nfe){
+			return false;
+		}
+	}
+	   public static boolean ValidarMail(String email) {
+	        // Patron para validar el email
+	        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+	 
+	        Matcher mather = pattern.matcher(email);
+	        return mather.find();
+	    }
+	
 
 }
